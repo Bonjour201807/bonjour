@@ -33,8 +33,6 @@ Object.keys(mockRouter).forEach(route => {
     app.use(route, express.static(path))
 })
 
-
-
 var devMiddleware = require('webpack-dev-middleware')(compiler, {
     publicPath: webpackConfig.output.publicPath,
     quiet: true

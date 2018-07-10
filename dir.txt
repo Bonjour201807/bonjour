@@ -1,0 +1,142 @@
+.
+├── LICENSE
+├── README.md
+├── build
+│   ├── build.js
+│   ├── check-versions.js
+│   ├── dev-client.js
+│   ├── dev-server.js
+│   ├── utils.js
+│   ├── vue-loader.conf.js
+│   ├── webpack.base.conf.js
+│   ├── webpack.dev.conf.js
+│   └── webpack.prod.conf.js
+├── config
+│   ├── dev.env.js
+│   ├── index.js
+│   ├── mock
+│   │   ├── bonjour.json
+│   │   ├── bonjour0.json
+│   │   ├── botInfo.json
+│   │   ├── chatmessage.json
+│   │   ├── history.json
+│   │   ├── hotplace.json
+│   │   ├── hottag.json
+│   │   ├── lists.json
+│   │   ├── search.json
+│   │   └── userInfo.json
+│   ├── mock.js
+│   └── prod.env.js
+├── dir.txt
+├── index.html
+├── package-lock.json
+├── package.json
+├── screenshot
+│   ├── douban_detial.png
+│   ├── douban_home.gif
+│   ├── douban_home.png
+│   ├── douban_login.gif
+│   ├── douban_logo.png
+│   ├── douban_movie.gif
+│   ├── douban_movie.png
+│   ├── douban_search.gif
+│   └── douban_search.png
+├── src
+│   ├── App.vue
+│   ├── assets
+│   │   ├── bg.png
+│   │   ├── bonjour.png
+│   │   ├── loading_green.gif
+│   │   ├── pic
+│   │   │   ├── bon-1.png
+│   │   │   ├── bon-2.png
+│   │   │   ├── bon-3.png
+│   │   │   ├── bon-4.png
+│   │   │   └── bon-5.png
+│   │   ├── place.png
+│   │   └── search.png
+│   ├── components
+│   │   ├── BoLists.vue
+│   │   ├── FooterBar.vue
+│   │   ├── List.vue
+│   │   ├── Loading.vue
+│   │   ├── MapGd.vue
+│   │   ├── Scroller.vue
+│   │   ├── SearchBar.vue
+│   │   ├── Tags.vue
+│   │   ├── Weather.vue
+│   │   ├── WeatherDetail.vue
+│   │   └── db
+│   │       ├── Banner.vue
+│   │       ├── Card.vue
+│   │       ├── DownloadApp.vue
+│   │       ├── Group.vue
+│   │       ├── HeaderBar.vue
+│   │       ├── HomeList.vue
+│   │       ├── List.vue
+│   │       ├── Loading.vue
+│   │       ├── Marking.vue
+│   │       ├── Rating.vue
+│   │       ├── Scroller.vue
+│   │       ├── ShowList.vue
+│   │       ├── SubNav.vue
+│   │       ├── Tags.vue
+│   │       ├── Types.vue
+│   │       └── UserBar.vue
+│   ├── main.js
+│   ├── pages
+│   │   ├── Attraction
+│   │   │   ├── Attraction.vue
+│   │   │   └── index.js
+│   │   ├── AttractionList
+│   │   │   ├── AttractionList.vue
+│   │   │   └── index.js
+│   │   ├── ChatBot
+│   │   │   ├── ChatBot.vue
+│   │   │   ├── Dialogue.vue
+│   │   │   └── index.js
+│   │   ├── Home
+│   │   │   ├── Home.vue
+│   │   │   └── index.js
+│   │   └── Search
+│   │       ├── Search.vue
+│   │       └── index.js
+│   ├── router
+│   │   └── index.js
+│   ├── store
+│   │   ├── index.js
+│   │   ├── modules
+│   │   │   ├── attraction.js
+│   │   │   ├── chatbot.js
+│   │   │   ├── listsStore.js
+│   │   │   ├── searchInfo.js
+│   │   │   ├── userInfo.js
+│   │   │   └── weather.js
+│   │   └── mutation-types.js
+│   └── views
+│       ├── BookView.vue
+│       ├── DetailView.vue
+│       ├── GroupView.vue
+│       ├── HomeView.vue
+│       ├── LoginView.vue
+│       ├── MovieView.vue
+│       ├── PagesView.vue
+│       ├── RegisterView.vue
+│       ├── SearchView.vue
+│       ├── StatusView.vue
+│       ├── SubjectView.vue
+│       └── TalionView.vue
+└── static
+    ├── avatar.png
+    ├── bg.png
+    ├── human.jpg
+    ├── logo.png
+    ├── pic
+    │   ├── bon-1.png
+    │   ├── bon-2.png
+    │   ├── bon-3.png
+    │   ├── bon-4.png
+    │   └── bon-5.png
+    └── robot.jpg
+
+21 directories, 118 files

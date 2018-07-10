@@ -6,8 +6,8 @@
 </template>
 
 <script>
-import SearchBar from "@/components/SearchBar.vue";
-import BoLists from "@/components/BoLists.vue";
+import SearchBar from "@/components/SearchBar";
+import BoLists from "@/components/BoLists";
 import { mapGetters } from "vuex";
 
 export default {
