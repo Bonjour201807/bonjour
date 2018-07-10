@@ -76,9 +76,8 @@ export default {
 };
 </script>
 
-<style lang="less" scoped>
+<style lang="scss" scoped>
 .wrap {
-  margin-top: 10px;
   font-size: 16px;
   background-color: #f4f4f6;
   .content {
