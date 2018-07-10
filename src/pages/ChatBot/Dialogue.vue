@@ -14,7 +14,7 @@
                 <div>
                   <input type="text" name="" class="input" value=""
                     v-model="todo" @keyup.enter="addTodo">
-                  <button type="button" name="button" @click="addTodo">发送</button>
+                  <button type="button" name="button" @click="addTodo">确定</button>
                 </div>
               </template>
               <template  v-if="item.flag===2">
@@ -24,7 +24,7 @@
                 <div>
                   <input type="text" name="" class="input" value=""
                     v-model="todo" @keyup.enter="addTodo">
-                  <button type="button" name="button" @click="addTodo">发送</button>
+                  <button type="button" name="button" @click="addTodo">确定</button>
                 </div>
                 <map-gd :lng="item.lng" :lat="item.lat" vid="1"></map-gd>
               </template>
