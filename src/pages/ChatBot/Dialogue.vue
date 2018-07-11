@@ -28,6 +28,13 @@
                 </div>
                 <map-gd :lng="item.lng" :lat="item.lat" vid="1"></map-gd>
               </template>
+              <template  v-if="item.flag===3">
+                <div>
+                  <input type="text" name="" class="input" value=""
+                    v-model="todo" @keyup.enter="addTodo">
+                  <button type="button" name="button" @click="addTodo">发送</button>
+                </div>
+              </template>
             </span>
         </span>
       </mu-list-item>

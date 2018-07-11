@@ -23,15 +23,15 @@
     "normalize.css": "^5.0.0",
     "superagent": "^3.5.2",
     "superagent-jsonp": "^0.1.1",
-    "vant": "^1.0.2",
+    "vant": "^1.1.12",
     "vue": "^2.1.10",
-    "vue-amap": "^0.5.4",
+    "vue-amap": "^0.5.8",
     "vue-awesome-swiper": "^3.1.3",
     "vue-hotel-datepicker": "^2.2.0",
-    "vue-infinite-loading": "^2.0.4",
-    "vue-router": "^2.2.0",
+    "vue-infinite-loading": "^2.3.1",
+    "vue-router": "^2.8.1",
     "vue-scroll-behavior": "^0.1.6",
-    "vuex": "^2.2.1"
+    "vuex": "^2.5.0"
   },
   "devDependencies": {
     "autoprefixer": "^6.7.2",
