@@ -90,17 +90,20 @@ export default {
   width: 100%;
   height: 40px;
   border-bottom: 1px solid #e2e2e2;
-  padding: 15px 0;
   text-align: center;
+  z-index: 500;
 }
 
 #content {
   padding: 0;
   position: relative;
+  background-color: #f4f4f6;
+  width: 100vw;
+  height: 100vh;
 }
 
 .patch-1 {
-  height: 70px;
+  height: 64px;
 }
 
 .input {
@@ -121,6 +124,7 @@ export default {
   text-align: center;
   background: #fff;
   border-top: 1px solid #e2e2e2;
+  z-index: 500;
 }
 </style>
 
