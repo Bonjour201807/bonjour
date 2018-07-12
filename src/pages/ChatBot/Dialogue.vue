@@ -11,7 +11,6 @@
                 {{item.message}}
               </template> -->
               <template v-if="item.flag===1">
-                <!-- <form> -->
                   <p>请选择出发地和出行时间：</p>
                   <div class="to-place">
                     <p>出发地: {{local | splitCity}}</p>
@@ -29,7 +28,6 @@
                     </p>
                   </div>
                   <mt-button size="small" @click="addLocationDays">确定</mt-button>
-                <!-- </form> -->
               </template>
               <template v-if="item.flag===2">
                 {{item.lng}}
@@ -41,6 +39,13 @@
                   <button type="button" name="button" @click="addTodo">确定</button>
                 </div>
                 <map-gd :lng="item.lng" :lat="item.lat" vid="1"></map-gd>
+              </template>
+              <template  v-if="item.flag===3">
+                <div>
+                  <input type="text" name="" class="input" value=""
+                    v-model="todo" @keyup.enter="addTodo">
+                  <button type="button" name="button" @click="addTodo">发送</button>
+                </div>
               </template>
             </span>
         </span>
