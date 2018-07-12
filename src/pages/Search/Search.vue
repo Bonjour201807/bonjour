@@ -4,7 +4,7 @@
     <div class="search-index">
       <div class="block select-bar">
         <div class="to-place">
-          <h2>目的地：{{local | splitCity}}</h2>
+          <h2>出发地：{{local | splitCity}}</h2>
         </div>
         <div class="to-day">
           <h2>出行天数：</h2>
@@ -32,7 +32,7 @@
         <h1>热门标签</h1> 
         <div class="text">
           <div class="box" v-for="item in hotTags">
-          {{item}}
+          {{item.name}}
           </div>
         </div>
       </div>
@@ -49,7 +49,7 @@
 </template>
 
 <script>
-import SearchBar from "@/components/SearchBar.vue";
+import SearchBar from "@/components/SearchBar";
 import Vue from "vue";
 import { mapState } from "vuex";
 import { Stepper } from "vant";

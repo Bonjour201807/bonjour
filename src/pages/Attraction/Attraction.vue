@@ -24,11 +24,9 @@
           </p>
         </div>
         <br />
-        <map-gd :lng="attractionItem.longitude" :lat="attractionItem.latitude"></map-gd>
         <weather :lng="attractionItem.longitude" :lat="attractionItem.latitude"></weather>
         <map-gd :lng="attractionItem.longitude" :lat="attractionItem.latitude"></map-gd>
         <br />
-        <map-gd :lng="attractionItem.longitude" :lat="attractionItem.latitude"></map-gd>
       </div>
     </template>
     <loading v-show="showLoading"></loading>

@@ -8,10 +8,16 @@ const state = {
   messageList: [
     {
       id: 0,
-      list: [{
-        id: 0, message: '你可以和我聊天', time: '4:28', lng: "116.418261",
-        lat: "39.921984", flag: 1
-      }]
+      list: [
+        // {
+        //   id: 0, message: '你可以和我聊天', time: '4:28', lng: "116.418261",
+        //   lat: "39.921984"
+        // },
+        {
+          id: 0, message: '不知道去哪儿浪，交给我～：', time: '4:28', lng: "116.418261",
+          lat: "39.921984", flag: 1
+        }
+      ]
     }
   ],
   // 消息队列副本，由于没有数据库，所以采用这样折中的方法
@@ -28,7 +34,7 @@ const state = {
 
 const getters = {
   // 对当前消息队列中的消息进行加工，添加对应的好友资料
-  nowMessageList: (state) => {
+  nowMessageList: () => {
     let list = []
     state.messageList.forEach((item, index, arr) => {
       // console.log('test')
@@ -104,7 +110,6 @@ const actions = {
     }).then(res => {
       // 将获取到的数据赋值给先前设置的变量
       robotData = res.data
-      // commit('changeList', ...robotData)
       commit('changeList', { self: false, ...robotData })
     })
     // 判断获取到的数据类型，在进行对应操作

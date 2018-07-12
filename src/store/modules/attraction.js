@@ -9,14 +9,14 @@ const state = {
 
 // Get the list of pictures for a single attraction
 const getters = {
-    slides(state) {
-        let filepaths = state.attractionItem.pic
-        let slides = []
-        filepaths.map(data => {
+    slides() {
+        let filepaths = state.attractionItem.pic;
+        let slides = [];
+        filepaths.map(data =>
             slides.push(
                 data.filepath
-            );
-        });
+            ),
+        );
         return slides;
     }
 }
@@ -64,7 +64,7 @@ const actions = {
      */
     getSingleEvent({ commit, state }, payload) {
         return new Promise((resolve, reject) => {
-            axios.get('/mock/bonjour' + payload.id)
+            axios.get(''.concat('/mock/bonjour', payload.id))
                 .then((res) => {
                     commit('getSingleEvent', res.data)
                     resolve(res.data)
