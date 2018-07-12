@@ -17,97 +17,97 @@
         {
             "tag": "瀑布",
             "name": "瀑布",
-            "filepath": "./static/pic/bon-1.png"
+            "filepath": "/static/pic/bon-1.png"
         },
         {
             "tag": "翠海",
             "name": "翠海",
-            "filepath": "./static/pic/bon-2.png"
+            "filepath": "/static/pic/bon-2.png"
         },
         {
             "tag": "翠海",
             "name": "翠海",
-            "filepath": "./static/pic/bon-3.png"
+            "filepath": "/static/pic/bon-3.png"
         },
         {
             "tag": "芦苇海",
             "name": "芦苇海",
-            "filepath": "./static/pic/bon-4.png"
+            "filepath": "/static/pic/bon-4.png"
         },
         {
             "tag": "瀑布",
             "name": "瀑布",
-            "filepath": "./static/pic/bon-5.png"
+            "filepath": "/static/pic/bon-5.png"
         },
         {
             "tag": "小路",
             "name": "小路",
-            "filepath": "./static/pic/bon-1.png"
+            "filepath": "/static/pic/bon-1.png"
         },
         {
             "tag": "彩林",
             "name": "彩林",
-            "filepath": "./static/pic/bon-2.png"
+            "filepath": "/static/pic/bon-2.png"
         },
         {
             "tag": "芦苇海",
             "name": "芦苇海",
-            "filepath": "./static/pic/bon-3.png"
+            "filepath": "/static/pic/bon-3.png"
         },
         {
             "tag": "翠海",
             "name": "翠海",
-            "filepath": "./static/pic/bon-4.png"
+            "filepath": "/static/pic/bon-4.png"
         },
         {
             "tag": "芦苇海",
             "name": "芦苇海",
-            "filepath": "./static/pic/bon-5.png"
+            "filepath": "/static/pic/bon-5.png"
         },
         {
             "tag": "翠海",
             "name": "翠海",
-            "filepath": "./static/pic/bon-1.png"
+            "filepath": "/static/pic/bon-1.png"
         },
         {
             "tag": "翠海",
             "name": "翠海",
-            "filepath": "./static/pic/bon-2.png"
+            "filepath": "/static/pic/bon-2.png"
         },
         {
             "tag": "瀑布",
             "name": "瀑布",
-            "filepath": "./static/pic/bon-3.png"
+            "filepath": "/static/pic/bon-3.png"
         },
         {
             "tag": "彩林",
             "name": "彩林",
-            "filepath": "./static/pic/bon-4.png"
+            "filepath": "/static/pic/bon-4.png"
         },
         {
             "tag": "海子",
             "name": "海子",
-            "filepath": "./static/pic/bon-5.png"
+            "filepath": "/static/pic/bon-5.png"
         },
         {
             "tag": "海子",
             "name": "海子",
-            "filepath": "./static/pic/bon-1.png"
+            "filepath": "/static/pic/bon-1.png"
         },
         {
             "tag": "芦苇海",
             "name": "芦苇海",
-            "filepath": "./static/pic/bon-1.png"
+            "filepath": "/static/pic/bon-1.png"
         },
         {
             "tag": "翠海",
             "name": "翠海",
-            "filepath": "./static/pic/bon-1.png"
+            "filepath": "/static/pic/bon-1.png"
         },
         {
             "tag": "芦苇海",
             "name": "芦苇海",
-            "filepath": "./static/pic/bon-1.png"
+            "filepath": "/static/pic/bon-1.png"
         }
     ]
 }

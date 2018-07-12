@@ -7,6 +7,7 @@ import {
   EMPTY_SEARCH_RESULT,
   SAVE_SEARCH_DAY,
 } from "../mutation-types";
+
 const state = {
   hotPlace: [],
   hotTags: [],
@@ -17,7 +18,7 @@ const state = {
 
 const actions = {
   getHotTags({ commit }, payload) {
-    axios.get('/api/tags').then((res) => {
+    axios.get('/mock/hottag').then((res) => {
       commit(SAVE_HOT_TAGS, res.data);
     })
   },

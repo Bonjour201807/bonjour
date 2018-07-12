@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { SAVE_LOCATION } from '../mutation-types';
+
 const state = {
   ip: "",
   local: ""

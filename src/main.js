@@ -12,7 +12,12 @@ import 'mint-ui/lib/style.css';
 import MuseUI from 'muse-ui';
 import 'muse-ui/dist/muse-ui.css';
 import 'muse-ui/dist/theme-carbon.css';
-Vue.use(MuseUI)
+Vue.use(MuseUI);
+import ElementUI from 'element-ui';
+import 'element-ui/lib/theme-chalk/index.css';
+Vue.use(ElementUI);
+import { Stepper } from "vant";
+Vue.use(Stepper);
 
 import axios from "axios";
 import VueAMap from 'vue-amap';
