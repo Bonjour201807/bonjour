@@ -5,17 +5,16 @@ import App from './App'
 import router from './router'
 import store from './store'
 import vueScrollBehavior from 'vue-scroll-behavior'
-import fastclick from 'fastclick'
 import 'normalize.css'
 import { Button } from 'mint-ui';
-import 'mint-ui/lib/style.css';
-import MuseUI from 'muse-ui';
-import 'muse-ui/dist/muse-ui.css';
-import 'muse-ui/dist/theme-carbon.css';
-Vue.use(MuseUI);
 import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
+import MuseUI from 'muse-ui';
+import 'mint-ui/lib/style.css'
+import 'muse-ui/dist/muse-ui.css';
+import 'muse-ui/dist/theme-carbon.css';
 Vue.use(ElementUI);
+Vue.use(MuseUI)
 
 import axios from "axios";
 import VueAMap from 'vue-amap';

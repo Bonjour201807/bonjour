@@ -27,7 +27,33 @@
                   <mt-button size="small" @click="addLocationDays">确定</mt-button>
               </template>
               <!-- flag=2，显示获取用户感兴趣标签的组件 -->
-              <template v-if="item.flag===2">
+              <template  v-if="item.flag===2">
+                {{item.message.text}}
+                <p></p>
+                <div>
+                  <span v-for="(tag,index) in item.message.tags" v-if="index%2===0">
+                  <el-button size="mini" v-model="arr[index]" :type="arr[index] === 1 ? 'primary' : 'info'" @click="handleapply(index)" round >{{tag}}</el-button>
+                  &nbsp;
+                  </span>
+                  </div>
+                  <p></p>
+                  <div>
+                  <span v-for="(tag,index) in item.message.tags" v-if="index%2===1">
+                  <el-button size="mini" v-model="arr[index]" :type="arr[index] === 1 ? 'primary' : 'info'" @click="handleapply(index)" round >{{tag}}</el-button>
+                  &nbsp;
+                  </span>
+                  <p></p>
+                  其它
+                  <p></p>
+                  <el-input type="textarea" v-model="inputtag" placeholder="输入感兴趣的景色，如森林、草甸"></el-input>
+                  <p></p>
+                  <el-button size="mini" type='primary' @click="handletag0(index)" round >提交</el-button>
+                  &nbsp;
+                  <el-button size="mini" type='primary' @click="handletag0(index)" round >不想选</el-button>
+                </div>
+              </template>
+              <!-- flag=3，展示推荐列表的组件 -->
+              <template v-if="item.flag===3">
                 {{item.message.lng}}
                 {{item.message.lat}}
                 <search-bar></search-bar>
@@ -37,14 +63,6 @@
                   <button type="button" name="button" @click="addTodo">确定</button>
                 </div>
                 <map-gd :lng="item.message.lng" :lat="item.message.lat" vid="1"></map-gd>
-              </template>
-              <!-- flag=3，展示推荐列表的组件 -->
-              <template  v-if="item.flag===3">
-                <div>
-                  <input type="text" name="" class="input" value=""
-                    v-model="todo" @keyup.enter="addTodo">
-                  <button type="button" name="button" @click="addTodo">发送</button>
-                </div>
               </template>
             </span>
         </span>
@@ -68,6 +86,7 @@ export default {
   data() {
     return {
       days: 0,
+      arr: [0, 0, 0, 0, 0, 0],
       todo: ""
     };
   },
@@ -88,6 +107,10 @@ export default {
     }
   },
   methods: {
+    handleapply(index) {
+      this.$set(this.arr, index, 1 - this.arr[index]);
+    },
+    submittag() {},
     addTodo() {
       if (this.todo.length) {
         this.$store.dispatch("sendValue", {
@@ -112,14 +135,6 @@ export default {
           departure: this.local.split("省")[1],
           days: this.days
         }
-        // message: "".concat(
-        //   this.local.split("省")[1],
-        //   "出发, 玩",
-        //   this.days,
-        //   "天"
-        // ),
-        // departure: this.local.split("省")[1],
-        // days: this.days
       });
       console.log(
         "".concat(this.local.split("省")[1], "出发, 玩", this.days, "天")
