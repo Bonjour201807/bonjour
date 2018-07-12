@@ -105,7 +105,7 @@ const actions = {
       // 将获取到的数据赋值给先前设置的变量
       robotData = res.data
       // commit('changeList', ...robotData)
-      commit('changeList', { self: false, id: robotData.id, message: robotData.message, flag: robotData.flag, lng: robotData.lng, lat: robotData.lat })
+      commit('changeList', { self: false, ...robotData })
     })
     // 判断获取到的数据类型，在进行对应操作
     // if (robotData.code === 100000) {

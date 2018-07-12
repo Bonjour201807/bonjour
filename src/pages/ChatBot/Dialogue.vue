@@ -6,7 +6,6 @@
                    :slot="item.id===1?'rightAvatar':'leftAvatar'" />
         <span :slot="item.id===1?'after':'title'">
             <span class="content" style="color: rgba(0, 0, 0, .9)">
-              <div>{{item.message}}</div>
               <template  v-if="item.flag===0">
                 {{item.message}}
               </template>
@@ -29,10 +28,28 @@
                 <map-gd :lng="item.lng" :lat="item.lat" vid="1"></map-gd>
               </template>
               <template  v-if="item.flag===3">
+                {{item.message1}}
+                <p></p>
                 <div>
-                  <input type="text" name="" class="input" value=""
-                    v-model="todo" @keyup.enter="addTodo">
-                  <button type="button" name="button" @click="addTodo">发送</button>
+                  <span v-for="(tag,index) in item.tags" v-if="index%2===0">
+                 <el-button size="mini" v-model="arr[index]" :type="arr[index] === 1 ? 'primary' : 'info'" @click="handleapply(index)" round >{{tag}}</el-button>
+                 &nbsp;
+                 </span>
+                 </div>
+                 <p></p>
+                 <div>
+                 <span v-for="(tag,index) in item.tags" v-if="index%2===1">
+                 <el-button size="mini" v-model="arr[index]" :type="arr[index] === 1 ? 'primary' : 'info'" @click="handleapply(index)" round >{{tag}}</el-button>
+                 &nbsp;
+                 </span>
+                 <p></p>
+                 其它
+                 <p></p>
+                 <el-input type="textarea" v-model="inputtag" placeholder="输入感兴趣的景色，如森林、草甸"></el-input>
+                 <p></p>
+                 <el-button size="mini" type='primary' @click="handletag0(index)" round >提交</el-button>
+                 &nbsp;
+                 <el-button size="mini" type='primary' @click="handletag0(index)" round >不想选</el-button>
                 </div>
               </template>
             </span>
@@ -53,6 +70,7 @@ export default {
   components: { MapGd, SearchBar },
   data() {
     return {
+      arr: [0, 0, 0, 0, 0, 0],
       todo: ""
     };
   },
@@ -68,6 +86,10 @@ export default {
     completed(index) {
       this.todos[index].isCompleted = !this.todos[index].isCompleted;
     },
+    handleapply(index) {
+      this.$set(this.arr, index, 1 - this.arr[index]);
+    },
+    submittag() {},
     addTodo() {
       if (this.todo.length) {
         this.$store.dispatch("sendValue", {
