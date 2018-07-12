@@ -16,8 +16,6 @@ Vue.use(MuseUI);
 import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
 Vue.use(ElementUI);
-import { Stepper } from "vant";
-Vue.use(Stepper);
 
 import axios from "axios";
 import VueAMap from 'vue-amap';
