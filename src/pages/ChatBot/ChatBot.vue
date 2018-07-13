@@ -46,20 +46,14 @@ export default {
         user: this.user,
         bot: this.bot
       };
-      console.log("2");
     }
   },
   methods: {
-    // Dispatching Actions
-    // ...mapActions(["getAllData"]),
-    completed(index) {
-      this.todos[index].isCompleted = !this.todos[index].isCompleted;
-    },
     addTodo() {
       if (this.todo.length) {
         this.$store.dispatch("sendValue", {
-          message: this.todo,
-          id: this.userData.bot.id
+          message: { text: this.todo },
+          id: this.userData.user.id
         });
       } else {
         console.log("不能为空");
