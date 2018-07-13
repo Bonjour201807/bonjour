@@ -29,18 +29,7 @@
                   </div>
                   <mt-button size="small" @click="addLocationDays">确定</mt-button>
               </template>
-              <template v-if="item.flag===2">
-                {{item.lng}}
-                {{item.lat}}
-                <search-bar></search-bar>
-                <div>
-                  <input type="text" name="" class="input" value=""
-                    v-model="todo" @keyup.enter="addTodo">
-                  <button type="button" name="button" @click="addTodo">确定</button>
-                </div>
-                <map-gd :lng="item.lng" :lat="item.lat" vid="1"></map-gd>
-              </template>
-              <template  v-if="item.flag===3">
+              <template  v-if="item.flag===2">
                 {{item.message1}}
                 <p></p>
                 <div>
