@@ -16,9 +16,9 @@ module.exports = {
   // 保存出行天数选择
   SAVE_SEARCH_DAY: 'SAVE_SEARCH_DAY',
 
-  //userInfo
-  // 保存用户本地信息
+  //selectPlace
+  // 保存省市区列表信息，用户当前定位信息及选择的出发地信息
   SAVE_LOCATION: 'SAVE_LOCATION',
-
+  SAVE_AREA_LIST: 'SAVE_AREA_LIST',
 
 }

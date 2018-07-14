@@ -1,13 +1,9 @@
 <template>
   <div class="detail-view">
     <template v-if="!showLoading">
-      
       <div class="info">
         <h2>{{attractionItem.name}}</h2>
         <scroller :slides="slides"></scroller>
-        <!-- <div class="poster">
-          <img :src="attractionItem.image_hlarge" alt="">
-        </div> -->
         <tags v-if="attractionItem.tags" :items="attractionItem.tags"></tags>
         <div class="detail">
           <p><b>耍法:&nbsp;&nbsp;</b>
@@ -49,11 +45,6 @@ export default {
       showLoading: true
     };
   },
-  //   filters: {
-  //     toArray (value) {
-  //       return value.split(',')
-  //     }
-  //   },
   computed: {
     // Getting Vuex State from store/modules/attraction
     ...mapState({

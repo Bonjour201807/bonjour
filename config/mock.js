@@ -8,5 +8,6 @@ module.exports = {
     '/mock/search': '/search.json',
     '/mock/chatmessage': '/chatmessage.json',
     '/mock/userInfo': '/userInfo.json',
-    '/mock/botInfo': '/botInfo.json'
+    '/mock/botInfo': '/botInfo.json',
+    '/mock/areaInfo': '/areaInfo.json'
 }

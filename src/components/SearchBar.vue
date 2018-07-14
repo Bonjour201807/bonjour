@@ -6,15 +6,14 @@
         <van-icon name="arrow-left" @click="backIconClick"/>
       </div>
       <input @keyup="doSearch" ref="search" class="search-input" type="text" placeholder="输入搜索内容">
-
   </div>
 </template>
 
 <script>
 import Vue from "Vue";
 import { Icon } from "vant";
-
 Vue.use(Icon);
+
 export default {
   name: "SearchBar",
   components: {

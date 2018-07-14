@@ -15,7 +15,6 @@ import 'muse-ui/dist/muse-ui.css';
 import 'muse-ui/dist/theme-carbon.css';
 Vue.use(ElementUI);
 Vue.use(MuseUI)
-
 import axios from "axios";
 import VueAMap from 'vue-amap';
 Vue.use(VueAMap);

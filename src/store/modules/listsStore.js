@@ -1,9 +1,11 @@
 import axios from 'axios';
 import { ADD_LISTS_INFO } from '../mutation-types';
+
 const state = {
     //首页Lists信息
     lists: []
 }
+
 const getters = {
     // 标签随机颜色属性
     colorTags(state) {

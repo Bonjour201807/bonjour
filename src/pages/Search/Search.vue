@@ -83,8 +83,8 @@ export default {
       searchHistory: state => state.searchInfo.searchHistory,
       searchResult: state => state.searchInfo.searchResult,
       SearchDay: state => state.searchInfo.SearchDay,
-      local: state => state.userInfo.local,
-      ip: state => state.userInfo.ip
+      local: state => state.selectPlace.local,
+      ip: state => state.selectPlace.ip
     })
   },
   created() {

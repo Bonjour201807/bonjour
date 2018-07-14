@@ -8,16 +8,14 @@
             <span class="content" style="color: rgba(0, 0, 0, .9)">
               <!-- flag=0，显示纯文本信息，由于用户发送的消息没有 flag 标识而且都是纯文本
                    所以为了显示用户消息需要增加一个判断 -->
-              <template  v-if="item.flag===0 || item.self===true">
+              <template v-if="item.flag===0 || item.self===true">
                 {{item.message.text}}
               </template>
               <!-- flag=1，显示获取出发地和出行时间的组件 -->
               <template v-if="item.flag===1">
                   <p>请选择出发地和出行时间：</p>
-                  <div class="to-place">
-                    <p>出发地: {{local | splitCity}}</p>
-                    <!-- <van-area :area-list="areaList" /> -->
-                  </div>
+                  <!-- <test></test> -->
+                  <select-place :local="local"></select-place>
                   <div class="to-day">
                     <p>出行天数:
                       <el-input-number v-model="days" :min="1" size="mini">
@@ -27,7 +25,7 @@
                   <mt-button size="small" @click="addLocationDays">确定</mt-button>
               </template>
               <!-- flag=2，显示获取用户感兴趣标签的组件 -->
-              <template  v-if="item.flag===2">
+              <template v-if="item.flag===2">
                 {{item.message.text}}
                 <p></p>
                 <div>
@@ -64,6 +62,27 @@
                 </div>
                 <map-gd :lng="item.message.lng" :lat="item.message.lat" vid="1"></map-gd>
               </template>
+              <!-- flag=4，展示景点详细信息的组件，包括景点图片、标签和耍法 -->
+              <template v-if="item.flag===4">
+                <scroller :page="chatbot"></scroller>
+              </template>
+              <!-- flag=5，展示近期天气的组件 -->
+              <template v-if="item.flag===5">
+                {{item.message.lng}}
+                {{item.message.lat}}
+              </template>
+              <!-- flag=6，地图展示附近景点的组件 -->
+              <template v-if="item.flag===6">
+                {{item.message.lng}}
+                {{item.message.lat}}
+                <search-bar></search-bar>
+                <div>
+                  <input type="text" name="" class="input" value=""
+                    v-model="todo" @keyup.enter="addTodo">
+                  <button type="button" name="button" @click="addTodo">确定</button>
+                </div>
+                <map-gd :lng="item.message.lng" :lat="item.message.lat" vid="1"></map-gd>
+              </template>
             </span>
         </span>
       </mu-list-item>
@@ -72,17 +91,15 @@
 </template>
 
 <script>
-import Vue from "vue";
 import { mapGetters, mapState } from "vuex";
 import MapGd from "@/components/MapGd";
-import SearchBar from "@/components/SearchBar";
-import { Area } from "vant";
-Vue.use(Area);
+import SelectPlace from "@/components/chatbot/SelectPlace";
+import Scroller from "@/components/Scroller";
 
 export default {
   name: "dialogue",
   props: ["userData"],
-  components: { MapGd, SearchBar },
+  components: { MapGd, SelectPlace, Scroller },
   data() {
     return {
       days: 0,
@@ -92,18 +109,12 @@ export default {
   },
   computed: {
     ...mapState({
-      local: state => state.userInfo.local,
-      ip: state => state.userInfo.ip,
-      messagelist: state => state.chatbot.messageList
+      local: state => state.selectPlace.local,
+      selectedPlace: state => state.selectPlace.selectedPlace
     }),
     ...mapGetters(["nowMessageList"]),
     updated() {
       this.$emit("scrollC");
-    }
-  },
-  filters: {
-    splitCity(value) {
-      return value.split("省")[1];
     }
   },
   methods: {
@@ -126,19 +137,12 @@ export default {
       this.$store.dispatch("sendValue", {
         id: this.userData.user.id,
         message: {
-          text: "".concat(
-            this.local.split("省")[1],
-            "出发, 玩",
-            this.days,
-            "天"
-          ),
-          departure: this.local.split("省")[1],
+          text: "".concat(this.selectedPlace, "出发, 玩", this.days, "天"),
+          departure: this.selectedPlace,
           days: this.days
         }
       });
-      console.log(
-        "".concat(this.local.split("省")[1], "出发, 玩", this.days, "天")
-      );
+      console.log("".concat(this.selectedPlace, "出发, 玩", this.days, "天"));
     }
   }
 };

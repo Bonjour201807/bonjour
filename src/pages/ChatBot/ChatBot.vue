@@ -100,6 +100,10 @@ export default {
   height: 64px;
 }
 
+.patch-2 {
+  height: 45px;
+}
+
 .input {
   border-color: #e2e2e2;
   /* height: 20px; */

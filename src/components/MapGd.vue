@@ -9,7 +9,7 @@
 
 <script>
 export default {
-  name: "map-gd",
+  name: "MapGd",
   // props: ["center","position"],
   props: ["mapid", "lng", "lat"],
   data() {
