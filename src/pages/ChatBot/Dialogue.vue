@@ -141,7 +141,7 @@ export default {
         id: this.userData.user.id,
         message: {
           text: "".concat("感兴趣的标签：", interesttags),
-          inputtag: inputtag,
+          inputtag: this.inputtag,
           selecttags: selecttags
         }
       });
