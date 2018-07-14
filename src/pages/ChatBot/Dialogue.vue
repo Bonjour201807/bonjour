@@ -14,7 +14,6 @@
               <!-- flag=1，显示获取出发地和出行时间的组件 -->
               <template v-if="item.flag===1">
                   <p>请选择出发地和出行时间：</p>
-                  <!-- <test></test> -->
                   <select-place :local="local"></select-place>
                   <div class="to-day">
                     <p>出行天数:
@@ -68,8 +67,7 @@
               </template>
               <!-- flag=5，展示近期天气的组件 -->
               <template v-if="item.flag===5">
-                {{item.message.lng}}
-                {{item.message.lat}}
+                
               </template>
               <!-- flag=6，地图展示附近景点的组件 -->
               <template v-if="item.flag===6">

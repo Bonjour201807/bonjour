@@ -1,5 +1,5 @@
 <template>
-    <div id="dialogue">
+    <div>
       <div id="header">
         <mu-appbar :title="user.name" :zDepth="0">
             <mu-icon-button icon="arrow_back" slot="left"/>
@@ -7,10 +7,7 @@
       </div>
       <div id="content">
         <div class="patch-1"></div>
-        <dialogue :userData="userData" class="dialogue"
-                    name="dialogue"
-                    @scrollC="scrollC"
-                    ></dialogue>
+        <dialogue :userData="userData" id="dailogue" name="dailogue"></dialogue>
         <div class="patch-2"></div>
         <!--锚点-->
         <a name="1" href="#1" ref="end"
@@ -25,7 +22,7 @@
 </template>
 
 <script>
-import { mapState, mapActions, mapMutations } from "vuex";
+import { mapGetters, mapState, mapActions, mapMutations } from "vuex";
 import dialogue from "./Dialogue";
 
 export default {
@@ -37,6 +34,7 @@ export default {
     };
   },
   computed: {
+    ...mapGetters(["nowMessageList"]),
     ...mapState({
       user: state => state.chatbot.data.user,
       bot: state => state.chatbot.data.bot
@@ -48,6 +46,23 @@ export default {
       };
     }
   },
+  watch: {
+    nowMessageList: function() {
+      this.$nextTick(() => {
+        document.body.scrollTop = document.body.scrollHeight;
+      });
+    }
+  },
+  // watch: {
+  //   nowMessageList: function() {
+  //     document.getElementById("dailogue").scrollTop = 1231;
+  //     document.getElementById("dailogue").scrollTop = document.getElementById(
+  //       "dailogue"
+  //     ).scrollHeight;
+  //     console.log("top:", document.getElementById("dailogue").scrollTop);
+  //     console.log("height:", document.getElementById("dailogue").scrollHeight);
+  //   }
+  // },
   methods: {
     addTodo() {
       if (this.todo.length) {
@@ -59,12 +74,15 @@ export default {
         console.log("不能为空");
       }
       this.todo = "";
-    },
-    // 监听子组件事件
-    scrollC() {
-      // 取巧的方法，每次组件更新后模拟点击，破坏性的修改哈希值，但是简便（此处可以修改为正常控制滚动条）
-      this.$refs.end.click();
+      // document.getElementById("nimabi").scrollTop = document.getElementById(
+      //   "nimabi"
+      // ).scrollHeight;
     }
+    // 监听子组件事件
+    // scrollC() {
+    //   // 取巧的方法，每次组件更新后模拟点击，破坏性的修改哈希值，但是简便（此处可以修改为正常控制滚动条）
+    //   this.$refs.end.click();
+    // }
   }
 };
 </script>

@@ -8,6 +8,10 @@ const state = {
     {
       self: false, id: 0, message: '不知道去哪儿浪，交给我～：', time: '4:28',
       lng: "116.418261", lat: "39.921984", flag: 1
+    },
+    {
+      self: false, id: 0, message: '不知道去哪儿浪，交给我～：', time: '4:28',
+      lng: "116.418261", lat: "39.921984", flag: 2
     }
   ],
 }
