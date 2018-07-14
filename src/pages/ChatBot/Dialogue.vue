@@ -96,9 +96,6 @@ import MapGd from "@/components/MapGd";
 import SelectPlace from "@/components/chatbot/SelectPlace";
 import Scroller from "@/components/Scroller";
 import SearchBar from "@/components/SearchBar";
-import { Area } from "vant";
-import { assertTSImportEqualsDeclaration } from "babel-types";
-Vue.use(Area);
 
 export default {
   name: "dialogue",
