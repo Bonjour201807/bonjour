@@ -45,9 +45,9 @@
                   <p></p>
                   <el-input type="textarea" v-model="inputtag" placeholder="输入感兴趣的景色，如森林、草甸"></el-input>
                   <p></p>
-                  <el-button size="mini" type='primary' @click="handletag0(index)" round >提交</el-button>
+                  <el-button size="mini" type='primary' @click="submittag(index)" round >提交</el-button>
                   &nbsp;
-                  <el-button size="mini" type='primary' @click="handletag0(index)" round >不想选</el-button>
+                  <el-button size="mini" type='primary' @click="submittag(index)" round >不想选</el-button>
                 </div>
               </template>
               <!-- flag=3，展示推荐列表的组件 -->
@@ -95,6 +95,10 @@ import { mapGetters, mapState } from "vuex";
 import MapGd from "@/components/MapGd";
 import SelectPlace from "@/components/chatbot/SelectPlace";
 import Scroller from "@/components/Scroller";
+import SearchBar from "@/components/SearchBar";
+import { Area } from "vant";
+import { assertTSImportEqualsDeclaration } from "babel-types";
+Vue.use(Area);
 
 export default {
   name: "dialogue",
@@ -104,7 +108,8 @@ export default {
     return {
       days: 0,
       arr: [0, 0, 0, 0, 0, 0],
-      todo: ""
+      todo: "",
+      inputtag: ""
     };
   },
   computed: {
@@ -121,7 +126,41 @@ export default {
     handleapply(index) {
       this.$set(this.arr, index, 1 - this.arr[index]);
     },
-    submittag() {},
+    submittag() {
+      var interesttags = "";
+      var selecttags = [];
+      for (var i = 0; i < this.arr.length; ++i) {
+        console.log(interesttags);
+        if (this.arr[i] === 1) {
+          selecttags.push(
+            this.nowMessageList[this.nowMessageList.length - 1].message.tags[i]
+          );
+          console.log(this.nowMessageList);
+          if (interesttags.length === 0)
+            interesttags = this.nowMessageList[this.nowMessageList.length - 1]
+              .message.tags[i];
+          else
+            interesttags +=
+              "、" +
+              this.nowMessageList[this.nowMessageList.length - 1].message.tags[
+                i
+              ];
+        }
+      }
+      console.log(interesttags);
+      if (interesttags.length === 0) {
+        interesttags = this.inputtag;
+      }
+      this.$store.dispatch("sendValue", {
+        id: this.userData.user.id,
+        message: {
+          text: "".concat("感兴趣的标签：", interesttags),
+          inputtag: this.inputtag,
+          selecttags: selecttags
+        }
+      });
+      console.log("".concat("感兴趣的标签：", interesttags));
+    },
     addTodo() {
       if (this.todo.length) {
         this.$store.dispatch("sendValue", {
