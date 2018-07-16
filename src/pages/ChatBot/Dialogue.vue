@@ -51,23 +51,16 @@
               </template>
               <!-- flag=3，展示推荐列表的组件 -->
               <template v-if="item.flag===3">
-                {{item.message.lng}}
-                {{item.message.lat}}
-                <search-bar></search-bar>
-                <div>
-                  <input type="text" name="" class="input" value=""
-                    v-model="todo" @keyup.enter="addTodo">
-                  <button type="button" name="button" @click="addTodo">确定</button>
-                </div>
-                <map-gd :lng="item.message.lng" :lat="item.message.lat" vid="1"></map-gd>
+                <rec-list :detail="item.message"></rec-list>
               </template>
               <!-- flag=4，展示景点详细信息的组件，包括景点图片、标签和耍法 -->
               <template v-if="item.flag===4">
-                <scroller :page="chatbot"></scroller>
+                <single-attraction :message="item.message"></single-attraction>
               </template>
               <!-- flag=5，展示近期天气的组件 -->
               <template v-if="item.flag===5">
-                
+                {{item.message.lat}}
+                {{item.message.lng}}
               </template>
               <!-- flag=6，地图展示附近景点的组件 -->
               <template v-if="item.flag===6">
@@ -92,13 +85,14 @@
 import { mapGetters, mapState } from "vuex";
 import MapGd from "@/components/MapGd";
 import SelectPlace from "@/components/chatbot/SelectPlace";
-import Scroller from "@/components/Scroller";
+import SingleAttraction from "@/components/chatbot/SingleAttraction";
+import RecList from "@/components/chatbot/RecList";
 import SearchBar from "@/components/SearchBar";
 
 export default {
   name: "dialogue",
   props: ["userData"],
-  components: { MapGd, SelectPlace, Scroller },
+  components: { MapGd, SelectPlace, SingleAttraction, RecList },
   data() {
     return {
       days: 0,
@@ -112,10 +106,7 @@ export default {
       local: state => state.selectPlace.local,
       selectedPlace: state => state.selectPlace.selectedPlace
     }),
-    ...mapGetters(["nowMessageList"]),
-    updated() {
-      this.$emit("scrollC");
-    }
+    ...mapGetters(["nowMessageList"])
   },
   methods: {
     handleapply(index) {
@@ -190,6 +181,7 @@ export default {
     display: inline-block;
     padding: 5px;
     background: #fff;
+    max-width: 350px;
   }
   .input {
     border-bottom: 1px solid;

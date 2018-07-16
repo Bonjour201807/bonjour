@@ -1,4 +1,3 @@
-
 <template>
 <div>
   <template v-if="page==='chatbot'">

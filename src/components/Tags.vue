@@ -10,17 +10,17 @@
 
 <script>
 export default {
-  name: 'tags',
+  name: "tags",
   props: {
     items: {
       type: Array,
       required: true
     }
   },
-  data () {
-    return {}
+  data() {
+    return {};
   }
-}
+};
 </script>
 
 <style lang="scss" scoped>
