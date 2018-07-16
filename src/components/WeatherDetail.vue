@@ -12,7 +12,6 @@
             </div>
             <span class="cond">{{ item.dayweather }}</span>
          </li>
-
        </ul>
      </div>
         <!-- <p>weather_lives: {{ weather_lives }}</p> -->

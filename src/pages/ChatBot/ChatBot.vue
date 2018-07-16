@@ -9,15 +9,12 @@
         <div class="patch-1"></div>
         <dialogue :userData="userData" id="dailogue" name="dailogue"></dialogue>
         <div class="patch-2"></div>
-        <!--锚点-->
-        <a name="1" href="#1" ref="end"
-           style="height:0;color:rgba(0,0,0,0)">.</a>
       </div>
       <div id="footer">
           <input type="text" name="" class="input" value=""
                  v-model="todo" @keyup.enter="addTodo">
           <button type="button" name="button" @click="addTodo">发送</button>
-        </div>
+      </div>
     </div>
 </template>
 
@@ -46,23 +43,21 @@ export default {
       };
     }
   },
+  created() {
+    console.log(document.body.scrollTop);
+    this.$nextTick(() => {
+      document.body.scrollTop = document.body.scrollHeight;
+      console.log(document.body.scrollTop);
+    });
+  },
   watch: {
     nowMessageList: function() {
       this.$nextTick(() => {
         document.body.scrollTop = document.body.scrollHeight;
+        console.log(document.body.scrollTop);
       });
     }
   },
-  // watch: {
-  //   nowMessageList: function() {
-  //     document.getElementById("dailogue").scrollTop = 1231;
-  //     document.getElementById("dailogue").scrollTop = document.getElementById(
-  //       "dailogue"
-  //     ).scrollHeight;
-  //     console.log("top:", document.getElementById("dailogue").scrollTop);
-  //     console.log("height:", document.getElementById("dailogue").scrollHeight);
-  //   }
-  // },
   methods: {
     addTodo() {
       if (this.todo.length) {
@@ -74,15 +69,7 @@ export default {
         console.log("不能为空");
       }
       this.todo = "";
-      // document.getElementById("nimabi").scrollTop = document.getElementById(
-      //   "nimabi"
-      // ).scrollHeight;
     }
-    // 监听子组件事件
-    // scrollC() {
-    //   // 取巧的方法，每次组件更新后模拟点击，破坏性的修改哈希值，但是简便（此处可以修改为正常控制滚动条）
-    //   this.$refs.end.click();
-    // }
   }
 };
 </script>
@@ -119,7 +106,7 @@ export default {
 }
 
 .patch-2 {
-  height: 45px;
+  height: 70px;
 }
 
 .input {
