@@ -10,7 +10,9 @@
                    所以为了显示用户消息需要增加一个判断 -->
               <template v-if="item.flag===0 || item.self===true">
                 {{item.message.text}}
+                
               </template>
+              
               <!-- flag=1，显示获取出发地和出行时间的组件 -->
               <template v-if="item.flag===1">
                   <p>请选择出发地和出行时间：</p>
@@ -67,7 +69,9 @@
               </template>
               <!-- flag=5，展示近期天气的组件 -->
               <template v-if="item.flag===5">
-                
+                <div style="margin: 5px">
+                    <iframe name="weather_inc" :src="item.message.address" width="250" height="440" frameborder="0" marginwidth="100" marginheight="0" scrolling="no"></iframe>
+                </div>
               </template>
               <!-- flag=6，地图展示附近景点的组件 -->
               <template v-if="item.flag===6">
@@ -94,11 +98,12 @@ import MapGd from "@/components/MapGd";
 import SelectPlace from "@/components/chatbot/SelectPlace";
 import Scroller from "@/components/Scroller";
 import SearchBar from "@/components/SearchBar";
+import Weather from "@/components/Weather";
 
 export default {
   name: "dialogue",
   props: ["userData"],
-  components: { MapGd, SelectPlace, Scroller },
+  components: { MapGd, SelectPlace, Scroller, Weather },
   data() {
     return {
       days: 0,

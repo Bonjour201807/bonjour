@@ -31,7 +31,7 @@ export default {
   },
   methods: {
     num2week(n) {
-      return "零一二三四五六七八九".charAt(n);
+      return "零一二三四五六日八九".charAt(n);
     }
   },
   computed: {
