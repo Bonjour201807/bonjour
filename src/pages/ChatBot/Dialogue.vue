@@ -136,6 +136,8 @@ export default {
       console.log(interesttags);
       if (interesttags.length === 0) {
         interesttags = this.inputtag;
+      } else if (this.inputtag != 0) {
+        interesttags += "、" + this.inputtag;
       }
       this.$store.dispatch("sendValue", {
         id: this.userData.user.id,
