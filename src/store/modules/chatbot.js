@@ -55,17 +55,14 @@ const state = {
       }
     },
     {
-      self: false,
-      "id": 0,
-      "flag": 6,
+      self: false, "id": 0, "flag": 6,
       "message": {
-        "latitude": 29.55016763,
-        "longitude": 103.7780374,
-        "idx": 2,
+        "latitude": 29.54414,
+        "longitude": 103.77232,
         "path": [
           [
-            103.77780364,
-            29.55016753
+            103.77232,
+            29.54414
           ],
           [
             103.7510354,
@@ -79,8 +76,8 @@ const state = {
         "markers": [
           {
             "position": [
-              103.77780364,
-              29.55016753
+              103.77232,
+              29.54414
             ],
             "label": {
               "content": "1.乐山大佛",
