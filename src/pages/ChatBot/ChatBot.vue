@@ -43,18 +43,18 @@ export default {
       };
     }
   },
-  created() {
-    console.log(document.body.scrollTop);
-    this.$nextTick(() => {
-      document.body.scrollTop = document.body.scrollHeight;
-      console.log(document.body.scrollTop);
-    });
-  },
+  // created() {
+  //   console.log(document.body.scrollTop);
+  //   this.$nextTick(() => {
+  //     document.body.scrollTop = document.body.scrollHeight;
+  //     console.log(document.body.scrollTop);
+  //   });
+  // },
   watch: {
     nowMessageList: function() {
       this.$nextTick(() => {
         document.body.scrollTop = document.body.scrollHeight;
-        console.log(document.body.scrollTop);
+        // console.log(document.body.scrollTop);
       });
     }
   },
