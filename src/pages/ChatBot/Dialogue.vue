@@ -62,20 +62,13 @@
               <!-- flag=5，展示近期天气的组件 -->
               <template v-if="item.flag===5">
                 <div style="margin: 5px">
-                    <iframe name="weather_inc" :src="item.message.address" width="250" height="440" frameborder="0" marginwidth="100" marginheight="0" scrolling="no"></iframe>
+                    <iframe name="weather_inc" :src="item.message.address" width="250" height="440" frameborder="0" marginwidth="200" marginheight="0" scrolling="no"></iframe>
                 </div>
               </template>
               <!-- flag=6，地图展示附近景点的组件 -->
               <template v-if="item.flag===6">
-                {{item.message.lng}}
-                {{item.message.lat}}
-                <search-bar></search-bar>
-                <div>
-                  <input type="text" name="" class="input" value=""
-                    v-model="todo" @keyup.enter="addTodo">
-                  <button type="button" name="button" @click="addTodo">确定</button>
-                </div>
-                <map-gd :lng="item.message.lng" :lat="item.message.lat" vid="1"></map-gd>
+                <!-- <weather :lng="item.longitude" :lat="item.latitude"></weather> -->
+                  <map-gd :lng="item.message.longitude" :lat="item.message.latitude" :path="item.message.path" :markers="item.message.markers" ></map-gd>
               </template>
             </span>
         </span>
@@ -86,7 +79,7 @@
 
 <script>
 import { mapGetters, mapState } from "vuex";
-import MapGd from "@/components/MapGd";
+import MapGd from "@/components/chatbot/ChatBotMap";
 import SelectPlace from "@/components/chatbot/SelectPlace";
 import SingleAttraction from "@/components/chatbot/SingleAttraction";
 import RecList from "@/components/chatbot/RecList";

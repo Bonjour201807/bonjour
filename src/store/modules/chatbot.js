@@ -45,6 +45,74 @@ const state = {
             "filepath": "/static/pic/bon-2.png"
           }]
       }
+    },
+    {
+      self: false, "id": 0, "flag": 5,
+      "message": {
+        "address": "http://i.tianqi.com/index.php?c=code&id=82&py=tianjin"
+      }
+    },
+    {
+      self: false, "id": 0, "flag": 6,
+      "message": {
+        "latitude": 29.54414,
+        "longitude": 103.77232,
+        "path": [
+          [
+            103.77232,
+            29.54414
+          ],
+          [
+            103.7510354,
+            29.52016773
+          ],
+          [
+            103.7680344,
+            29.52016733
+          ]
+        ],
+        "markers": [
+          {
+            "position": [
+              103.77232,
+              29.54414
+            ],
+            "label": {
+              "content": "1.乐山大佛",
+              "offset": [
+                0,
+                0
+              ]
+            }
+          },
+          {
+            "position": [
+              103.7510354,
+              29.52016773
+            ],
+            "label": {
+              "content": "2.赛里木湖",
+              "offset": [
+                0,
+                0
+              ]
+            }
+          },
+          {
+            "position": [
+              103.7680344,
+              29.52016773
+            ],
+            "label": {
+              "content": "3.喀纳斯",
+              "offset": [
+                0,
+                0
+              ]
+            }
+          }
+        ]
+      }
     }
   ],
 }
