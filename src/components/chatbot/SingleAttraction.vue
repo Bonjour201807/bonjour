@@ -1,6 +1,6 @@
 <template>
   <router-link :to="{name: 'Attraction', params: { id: message.id }}" append>
-    <mu-card style="box-shadow: none; width: 100%; max-width: 250px; margin: 0 auto;">
+    <mu-card style="box-shadow: none; width: 100%; max-width: 200px; max-height: 400px;margin: 0 auto;">
       <!-- <mu-card-header> -->
         <!-- <mu-avatar slot="avatar">
           <img src="../../assets/images/uicon.jpg">

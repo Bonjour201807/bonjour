@@ -1,16 +1,19 @@
 <template>
   <div class="scroller">
-    <div class="content">
+    <div class="content" style="width: 100%; max-width: 350px;">
       <!-- <slot name="promItem"></slot> -->
       <ul class="hasCover">
-        <li v-for="item in detail">
-          <router-link :to="{name: 'Attraction', params: { id: item.id }}" append>
-            <single-attraction :message="item" mode="list"></single-attraction>
-            <!-- <img v-if="item.images" :src="item.images.large" alt="">
-            <span class="title">{{item.title}}</span> -->
-            <!-- <rating v-if="item.rating" :rating="item.rating"></rating> -->
-          </router-link>
-        </li>
+        <swiper :options="swiperOption" ref="mySwiper" class="swiper">
+          <swiper-slide v-for="item in detail" class="swiper-slide">
+            <router-link :to="{name: 'Attraction', params: { id: item.id }}" append>
+              <single-attraction :message="item" mode="list"></single-attraction>
+              <!-- <img v-if="item.images" :src="item.images.large" alt="">
+              <span class="title">{{item.title}}</span> -->
+              <!-- <rating v-if="item.rating" :rating="item.rating"></rating> -->
+            </router-link>
+          </swiper-slide>
+          <div class="swiper-pagination" slot="pagination"></div>
+        </swiper>
       </ul>
     </div>
   </div>
@@ -36,11 +39,14 @@ export default {
       // ],
       swiperOption: {
         debugger: true,
-        slidesPerView: "auto",
         centeredSlides: true,
-        // spaceBetween: 0,
-        roundLengths: true,
-        initialSlide: 1
+        pagination: ".swiper-pagination",
+        slidesPerView: "auto",
+        spaceBetween: 13,
+        pagination: {
+          el: ".swiper-pagination",
+          clickable: true //此参数设置为true时，点击分页器的指示点分页器会控制Swiper切换。
+        }
       }
     };
   }
@@ -48,6 +54,47 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.swiper {
+  width: 250px;
+}
+
+.swiper-slide {
+  width: 80%;
+  height: 300px;
+  // display: -webkit-box;
+  // display: -ms-flexbox;
+  // display: -webkit-flex;
+  // display: flex;
+  // -webkit-box-pack: center;
+  // -ms-flex-pack: center;
+  // -webkit-justify-content: center;
+  // justify-content: center;
+  // -webkit-box-align: center;
+  // -ms-flex-align: center;
+  // -webkit-align-items: center;
+  // align-items: center;
+
+  &.swiper-slide-active {
+    img {
+      margin-top: 0;
+      width: 100%;
+      height: 100%;
+    }
+  }
+  img {
+    display: block;
+    margin: 0 auto;
+    margin-top: 3.5%;
+    width: 95.625%;
+    height: 90.625%;
+    -webkit-transition: all 1s ease 0s;
+    -moz-transition: all 1s ease 0s;
+    -ms-transition: all 1s ease 0s;
+    -o-transition: all 1s ease 0s;
+    transition: all 1s ease 0s;
+  }
+}
+
 .scroller {
   padding-top: 1rem;
 }
