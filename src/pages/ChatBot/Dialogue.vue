@@ -62,7 +62,7 @@
               <!-- flag=5，展示近期天气的组件 -->
               <template v-if="item.flag===5">
                 <div style="margin: 5px">
-                    <iframe name="weather_inc" :src="item.message.address" width="250" height="440" frameborder="0" marginwidth="200" marginheight="0" scrolling="no"></iframe>
+                    <iframe name="weather_inc" :src="item.message.address" width="170" height="400" frameborder="0" marginwidth="200" marginheight="0" scrolling="no"></iframe>
                 </div>
               </template>
               <!-- flag=6，地图展示附近景点的组件 -->
