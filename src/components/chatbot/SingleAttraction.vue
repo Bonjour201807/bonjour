@@ -43,7 +43,7 @@
 </template>
 
 <script>
-import Tags from "@/components/Tags";
+import Tags from "@/components/chatbot/ChatBotTags";
 
 export default {
   name: "SingleAttraction",
