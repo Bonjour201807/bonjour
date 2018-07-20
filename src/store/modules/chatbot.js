@@ -161,15 +161,16 @@ const actions = {
     })
   },
   // 聊天机器人
-  sendValue: async ({ commit }, { id, message }) => {
+  sendValue: async ({ commit }, { id, message, user_flag }) => {
     // 声明一个变量用来储存等下ajax获取的数据
     let robotData = ''
     // 处理输入的内容，设置self为true，作为一个标记。
-    commit('changeList', { self: true, id, message })
+    commit('changeList', { self: true, id, message, user_flag })
     await axios.get('/mock/chatmessage', {
       params: {
+        id,
         message,
-        id
+        user_flag
       }
     }).then(res => {
       // 将获取到的数据赋值给先前设置的变量

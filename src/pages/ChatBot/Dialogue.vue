@@ -10,6 +10,7 @@
                    所以为了显示用户消息需要增加一个判断 -->
               <template v-if="item.flag===0 || item.self===true">
                 {{item.message.text}}
+                {{item}}
               </template>
               <!-- flag=1，显示获取出发地和出行时间的组件 -->
               <template v-if="item.flag===1">
@@ -21,7 +22,7 @@
                       </el-input-number>
                     </p>
                   </div>
-                  <mt-button size="small" @click="addLocationDays">确定</mt-button>
+                  <mt-button size="small" @click="addLocationDays(item.flag)">确定</mt-button>
               </template>
               <!-- flag=2，显示获取用户感兴趣标签的组件 -->
               <template v-if="item.flag===2">
@@ -44,9 +45,9 @@
                   <p></p>
                   <el-input type="textarea" v-model="input_tag" placeholder="输入感兴趣的景色，如森林、草甸"></el-input>
                   <p></p>
-                  <el-button size="mini" type='primary' @click="submitTag(index)" round >提交</el-button>
-                  &nbsp;
-                  <el-button size="mini" type='primary' @click="submitTag(index)" round >不想选</el-button>
+                  <el-button size="mini" type='primary' @click="submitTag(index, item.flag)" round >提交</el-button>
+                  &nbsp; <!-- 这里的 index 是指当前显示的 item 在 nowMessageList 中的 index -->
+                  <el-button size="mini" type='primary' @click="submitTag(index, item.flag)" round >不想选</el-button>
                 </div>
               </template>
               <!-- flag=3，展示推荐列表的组件 -->
@@ -105,50 +106,43 @@ export default {
     handleApply(index) {
       this.$set(this.arr, index, 1 - this.arr[index]);
     },
-    submitTag() {
-      var interesttags = "";
-      var selecttags = [];
+    submitTag(index, flag) {
+      var interest_tags = "";
+      var select_tags = [];
       for (var i = 0; i < this.arr.length; ++i) {
-        console.log(interesttags);
         if (this.arr[i] === 1) {
-          selecttags.push(
-            this.nowMessageList[this.nowMessageList.length - 1].message.tags[i]
-          );
-          console.log(this.nowMessageList);
-          if (interesttags.length === 0)
-            interesttags = this.nowMessageList[this.nowMessageList.length - 1]
-              .message.tags[i];
+          select_tags.push(this.nowMessageList[index].message.tags[i]);
+          if (interest_tags.length === 0)
+            interest_tags = this.nowMessageList[index].message.tags[i];
           else
-            interesttags +=
-              "、" +
-              this.nowMessageList[this.nowMessageList.length - 1].message.tags[
-                i
-              ];
+            interest_tags += "、" + this.nowMessageList[index].message.tags[i];
         }
       }
-      console.log(interesttags);
-      if (interesttags.length === 0) {
-        interesttags = this.input_tag;
+      console.log(interest_tags);
+      if (interest_tags.length === 0) {
+        interest_tags = this.input_tag;
       } else if (this.input_tag != 0) {
-        interesttags += "、" + this.input_tag;
+        interest_tags += "、" + this.input_tag;
       }
       this.$store.dispatch("sendValue", {
         id: this.userData.user.id,
         message: {
-          text: "".concat("感兴趣的标签：", interesttags),
+          text: "".concat("感兴趣的标签：", interest_tags),
           input_tag: this.input_tag,
-          selecttags: selecttags
-        }
+          select_tags: select_tags
+        },
+        user_flag: flag
       });
-      console.log("".concat("感兴趣的标签：", interesttags));
+      console.log("".concat("感兴趣的标签：", interest_tags));
     },
-    addLocationDays() {
+    addLocationDays(flag) {
       this.$store.dispatch("sendValue", {
         id: this.userData.user.id,
         message: {
           text: "".concat(this.selectedPlace, "出发, 玩", this.days, "天"),
           departure: this.selectedPlace,
-          days: this.days
+          days: this.days,
+          user_flag: flag
         }
       });
       console.log("".concat(this.selectedPlace, "出发, 玩", this.days, "天"));
