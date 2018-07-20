@@ -6,19 +6,21 @@
           <img src="../../assets/images/uicon.jpg">
         </mu-avatar> -->
       <!-- </mu-card-header> -->
-      <template v-if="mode==='list'">
+      <div v-if="mode==='list'" style="height:130px">
         <mu-card-media :title="message.name" style="font-size: 20px;">
           <img :src="picture.filepath">
         </mu-card-media>
-      </template>
-      <template v-else>
+      </div>
+      <div v-else>
         <mu-card-media :title="message.name">
           <img :src="picture.filepath">
         </mu-card-media>
-      </template>
+      </div>
       <!-- <mu-card-title title="Content Title" sub-title="Content Title"></mu-card-title> -->
       <mu-card-text>
-        <tags v-if="message.tags" :items="message.tags"></tags>
+        <div style="height:75px;padding-top:15px">
+          <tags v-if="message.tags" :items="message.tags"></tags>
+        </div>
         <div class="detail">
           <p><b>耍法:&nbsp;&nbsp;</b>
             <ul>

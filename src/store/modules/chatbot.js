@@ -51,7 +51,7 @@ const state = {
       "id": 0,
       "flag": 5,
       "message": {
-        "address": "http://i.tianqi.com/index.php?c=code&id=82&py=laoting"
+        "address": "http://i.tianqi.com/index.php?c=code&id=82&py=shenzhen"
       }
     },
     {
