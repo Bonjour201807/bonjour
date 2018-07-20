@@ -10,7 +10,6 @@
                    所以为了显示用户消息需要增加一个判断 -->
               <template v-if="item.flag===0 || item.self===true">
                 {{item.message.text}}
-                {{item}}
               </template>
               <!-- flag=1，显示获取出发地和出行时间的组件 -->
               <template v-if="item.flag===1">
