@@ -12,7 +12,7 @@
       </div>
       <div id="footer">
           <input type="text" name="" class="input" value=""
-                 v-model="user_input" @keyup.enter="addUserInput">
+                 v-model="text" @keyup.enter="addUserInput">
           <button type="button" name="button" @click="addUserInput">发送</button>
       </div>
     </div>
@@ -27,7 +27,7 @@ export default {
   components: { dialogue },
   data() {
     return {
-      user_input: ""
+      text: ""
     };
   },
   computed: {
@@ -53,16 +53,17 @@ export default {
   },
   methods: {
     addUserInput() {
-      if (this.user_input.length) {
+      if (this.text.length) {
         this.$store.dispatch("sendValue", {
           id: this.userData.user.id,
-          message: { user_input: this.user_input },
+          message: { text: this.text },
           user_flag: 0
         });
+        console.log(this.text);
       } else {
         console.log("不能为空");
       }
-      this.user_input = "";
+      this.text = "";
     }
   }
 };

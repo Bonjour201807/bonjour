@@ -6,13 +6,12 @@ const state = {
   // id="0"表示机器人
   messageList: [
     {
-      self: false, id: 0, message: '不知道去哪儿浪，交给我～：', time: '4:28',
-      lng: "116.418261", lat: "39.921984", flag: 1
+      self: false, id: 0, message: { "text": "不知道去哪儿浪，交给我～" }, time: '4:28', flag: 1
     },
     {
       self: false, "id": 0, "flag": 2,
       "message": {
-        "text": "您可能感兴趣的标签",
+        "text": "您可能感兴趣的标签：",
         "tags": ["云海", "湖泊", "雪山", "日出", "冰川", "峡谷"]
       }
     },
@@ -51,7 +50,7 @@ const state = {
       "id": 0,
       "flag": 5,
       "message": {
-        "address": "http://i.tianqi.com/index.php?c=code&id=82&py=tianjin"
+        "weather_url": "http://i.tianqi.com/index.php?c=code&id=82&py=tianjin"
       }
     },
     {
@@ -169,8 +168,8 @@ const actions = {
     await axios.get('/mock/chatmessage', {
       params: {
         id,
-        message,
-        user_flag
+        user_flag,
+        message
       }
     }).then(res => {
       // 将获取到的数据赋值给先前设置的变量

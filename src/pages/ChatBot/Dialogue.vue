@@ -13,17 +13,19 @@
               </template>
               <!-- flag=1，显示获取出发地和出行时间的组件 -->
               <template v-if="item.flag===1">
-                  <p>请选择出发地和出行时间：</p>
-                  <select-place :local="local"></select-place>
-                  <div class="to-day">
-                    <p>出行天数:
-                      <el-input-number v-model="days" :min="1" size="mini">
-                      </el-input-number>
-                    </p>
-                  </div>
-                  <mt-button size="small" @click="addLocationDays(item.flag)">确定</mt-button>
+                {{item.message.text}}
+                <p>请选择出发地和出行时间：</p>
+                <select-place :local="local"></select-place>
+                <div class="to-day">
+                  <p>出行天数:
+                    <el-input-number v-model="days" :min="1" size="mini">
+                    </el-input-number>
+                  </p>
+                </div>
+                <mt-button size="small" @click="addLocationDays(item.flag)">确定</mt-button>
               </template>
               <!-- flag=2，显示获取用户感兴趣标签的组件 -->
+              <!-- 可以考虑去掉‘取消’按钮，如果用户什么标签都没选也没输入，不应该返回信息，这里的逻辑需要修改 -->
               <template v-if="item.flag===2">
                 {{item.message.text}}
                 <p></p>
@@ -60,7 +62,7 @@
               <!-- flag=5，展示近期天气的组件 -->
               <template v-if="item.flag===5">
                 <div style="margin: 5px">
-                    <iframe name="weather_inc" :src="item.message.address" width="250" height="440" frameborder="0" marginwidth="200" marginheight="0" scrolling="no"></iframe>
+                    <iframe name="weather_inc" :src="item.message.weather_url" width="250" height="440" frameborder="0" marginwidth="200" marginheight="0" scrolling="no"></iframe>
                 </div>
               </template>
               <!-- flag=6，地图展示附近景点的组件 -->
@@ -125,23 +127,23 @@ export default {
       }
       this.$store.dispatch("sendValue", {
         id: this.userData.user.id,
+        user_flag: flag,
         message: {
           text: "".concat("感兴趣的标签：", interest_tags),
           input_tag: this.input_tag,
           select_tags: select_tags
-        },
-        user_flag: flag
+        }
       });
       console.log("".concat("感兴趣的标签：", interest_tags));
     },
     addLocationDays(flag) {
       this.$store.dispatch("sendValue", {
         id: this.userData.user.id,
+        user_flag: flag,
         message: {
           text: "".concat(this.selectedPlace, "出发, 玩", this.days, "天"),
           departure: this.selectedPlace,
-          days: this.days,
-          user_flag: flag
+          days: this.days
         }
       });
       console.log("".concat(this.selectedPlace, "出发, 玩", this.days, "天"));
