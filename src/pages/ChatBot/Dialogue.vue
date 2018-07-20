@@ -10,9 +10,7 @@
                    所以为了显示用户消息需要增加一个判断 -->
               <template v-if="item.flag===0 || item.self===true">
                 {{item.message.text}}
-                
               </template>
-              
               <!-- flag=1，显示获取出发地和出行时间的组件 -->
               <template v-if="item.flag===1">
                   <p>请选择出发地和出行时间：</p>
@@ -31,24 +29,24 @@
                 <p></p>
                 <div>
                   <span v-for="(tag,index) in item.message.tags" v-if="index%2===0">
-                  <el-button size="mini" v-model="arr[index]" :type="arr[index] === 1 ? 'primary' : 'info'" @click="handleapply(index)" round >{{tag}}</el-button>
+                  <el-button size="mini" v-model="arr[index]" :type="arr[index] === 1 ? 'primary' : 'info'" @click="handleApply(index)" round >{{tag}}</el-button>
                   &nbsp;
                   </span>
                   </div>
                   <p></p>
                   <div>
                   <span v-for="(tag,index) in item.message.tags" v-if="index%2===1">
-                  <el-button size="mini" v-model="arr[index]" :type="arr[index] === 1 ? 'primary' : 'info'" @click="handleapply(index)" round >{{tag}}</el-button>
+                  <el-button size="mini" v-model="arr[index]" :type="arr[index] === 1 ? 'primary' : 'info'" @click="handleApply(index)" round >{{tag}}</el-button>
                   &nbsp;
                   </span>
                   <p></p>
                   其它
                   <p></p>
-                  <el-input type="textarea" v-model="inputtag" placeholder="输入感兴趣的景色，如森林、草甸"></el-input>
+                  <el-input type="textarea" v-model="input_tag" placeholder="输入感兴趣的景色，如森林、草甸"></el-input>
                   <p></p>
-                  <el-button size="mini" type='primary' @click="submittag(index)" round >提交</el-button>
+                  <el-button size="mini" type='primary' @click="submitTag(index)" round >提交</el-button>
                   &nbsp;
-                  <el-button size="mini" type='primary' @click="submittag(index)" round >不想选</el-button>
+                  <el-button size="mini" type='primary' @click="submitTag(index)" round >不想选</el-button>
                 </div>
               </template>
               <!-- flag=3，展示推荐列表的组件 -->
@@ -67,7 +65,6 @@
               </template>
               <!-- flag=6，地图展示附近景点的组件 -->
               <template v-if="item.flag===6">
-                <!-- <weather :lng="item.longitude" :lat="item.latitude"></weather> -->
                   <map-gd :lng="item.message.longitude" :lat="item.message.latitude" :path="item.message.path" :markers="item.message.markers" ></map-gd>
               </template>
             </span>
@@ -94,8 +91,7 @@ export default {
     return {
       days: 0,
       arr: [0, 0, 0, 0, 0, 0],
-      todo: "",
-      inputtag: ""
+      input_tag: ""
     };
   },
   computed: {
@@ -106,10 +102,10 @@ export default {
     ...mapGetters(["nowMessageList"])
   },
   methods: {
-    handleapply(index) {
+    handleApply(index) {
       this.$set(this.arr, index, 1 - this.arr[index]);
     },
-    submittag() {
+    submitTag() {
       var interesttags = "";
       var selecttags = [];
       for (var i = 0; i < this.arr.length; ++i) {
@@ -132,30 +128,19 @@ export default {
       }
       console.log(interesttags);
       if (interesttags.length === 0) {
-        interesttags = this.inputtag;
-      } else if (this.inputtag != 0) {
-        interesttags += "、" + this.inputtag;
+        interesttags = this.input_tag;
+      } else if (this.input_tag != 0) {
+        interesttags += "、" + this.input_tag;
       }
       this.$store.dispatch("sendValue", {
         id: this.userData.user.id,
         message: {
           text: "".concat("感兴趣的标签：", interesttags),
-          inputtag: this.inputtag,
+          input_tag: this.input_tag,
           selecttags: selecttags
         }
       });
       console.log("".concat("感兴趣的标签：", interesttags));
-    },
-    addTodo() {
-      if (this.todo.length) {
-        this.$store.dispatch("sendValue", {
-          message: { text: this.todo },
-          id: this.userData.user.id
-        });
-      } else {
-        console.log("不能为空");
-      }
-      this.todo = "";
     },
     addLocationDays() {
       this.$store.dispatch("sendValue", {

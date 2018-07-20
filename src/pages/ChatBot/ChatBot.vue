@@ -12,8 +12,8 @@
       </div>
       <div id="footer">
           <input type="text" name="" class="input" value=""
-                 v-model="todo" @keyup.enter="addTodo">
-          <button type="button" name="button" @click="addTodo">发送</button>
+                 v-model="user_input" @keyup.enter="addUserInput">
+          <button type="button" name="button" @click="addUserInput">发送</button>
       </div>
     </div>
 </template>
@@ -27,7 +27,7 @@ export default {
   components: { dialogue },
   data() {
     return {
-      todo: ""
+      user_input: ""
     };
   },
   computed: {
@@ -43,13 +43,6 @@ export default {
       };
     }
   },
-  // created() {
-  //   console.log(document.body.scrollTop);
-  //   this.$nextTick(() => {
-  //     document.body.scrollTop = document.body.scrollHeight;
-  //     console.log(document.body.scrollTop);
-  //   });
-  // },
   watch: {
     nowMessageList: function() {
       this.$nextTick(() => {
@@ -59,29 +52,23 @@ export default {
     }
   },
   methods: {
-    addTodo() {
-      if (this.todo.length) {
+    addUserInput() {
+      if (this.user_input.length) {
         this.$store.dispatch("sendValue", {
-          message: { text: this.todo },
-          id: this.userData.user.id
+          id: this.userData.user.id,
+          message: { user_input: this.user_input },
+          user_flag: 0
         });
       } else {
         console.log("不能为空");
       }
-      this.todo = "";
+      this.user_input = "";
     }
   }
 };
 </script>
 
 <style lang="less" scoped>
-#todoList {
-  margin: auto;
-  /* background-color: #e2e2e2; */
-  /* width: 50%; */
-  /* max-width: 350px; */
-}
-
 #header {
   position: fixed;
   top: 0;

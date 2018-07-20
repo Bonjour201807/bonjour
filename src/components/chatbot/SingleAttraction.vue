@@ -7,7 +7,7 @@
         </mu-avatar> -->
       <!-- </mu-card-header> -->
       <template v-if="mode==='list'">
-        <mu-card-media :title="message.name" style="font-size: 20px;">
+        <mu-card-media :title="message.name" style="font-size: 14px;">
           <img :src="picture.filepath">
         </mu-card-media>
       </template>
