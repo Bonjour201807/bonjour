@@ -42,6 +42,7 @@ export default {
         centeredSlides: true,
         pagination: ".swiper-pagination",
         slidesPerView: "auto",
+        loop: true,
         spaceBetween: 13,
         pagination: {
           el: ".swiper-pagination",

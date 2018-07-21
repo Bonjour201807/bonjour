@@ -42,7 +42,7 @@ export default {
 .amap-wrapper {
   //   width: 90%;
   height: 300px;
-  width: 260px;
+  width: 250px;
   margin-top: 20px;
   // border: 1px solid #c2c2c2;
 }

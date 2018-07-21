@@ -2,7 +2,7 @@
     <div>
       <div id="header">
         <mu-appbar :title="user.name" :zDepth="0">
-            <el-button icon="el-icon-back" circle slot="left"/></el-button>
+            <el-button icon="el-icon-close" circle type="info" slot="left"/></el-button>
         </mu-appbar>
       </div>
       <div id="content">
@@ -14,9 +14,10 @@
           <el-input
             class="elinput"
             type="textarea"
+            :autosize="{ minRows:1, maxRows: 2}"
             placeholder="请输入内容"
             v-model="text"
-            size="small"
+            size="medium"
             style="width:250px"
             @keyup.enter.native="addUserInput"/>
           <el-button class="elbutton" type="primary" name="button"  size="small"  @click="addUserInput">发送</el-button>
@@ -112,7 +113,7 @@ export default {
   line-height: 30px;
 }
 .elinput {
-  padding-top: 10px;
+  padding-top: 15px;
 }
 
 #footer {
@@ -120,7 +121,7 @@ export default {
   bottom: 0;
   left: 0;
   width: 100%;
-  height: 70px;
+  height: 75px;
   text-align: center;
   background: #fff;
   border-top: 1px solid #e2e2e2;

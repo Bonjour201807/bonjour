@@ -9,7 +9,7 @@
               <!-- flag=0，显示纯文本信息，由于用户发送的消息没有 flag 标识而且都是纯文本
                    所以为了显示用户消息需要增加一个判断 -->
               <template v-if="item.flag===0 || item.self===true">
-                <div style="max-width:250px">
+                <div style="max-width:250px;line-height:22px">
                   {{item.message.text}}
                 </div>
               </template>
@@ -161,6 +161,7 @@ export default {
   word-break: break-all;
   background-color: #f4f4f6;
   .content {
+    border-radius: 0px 10px 10px 10px;
     display: inline-block;
     padding: 5px;
     background: #fff;
