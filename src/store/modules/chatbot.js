@@ -50,11 +50,7 @@ const state = {
       "id": 0,
       "flag": 5,
       "message": {
-<<<<<<< HEAD
-        "address": "http://i.tianqi.com/index.php?c=code&id=82&py=shenzhen"
-=======
         "weather_url": "http://i.tianqi.com/index.php?c=code&id=82&py=tianjin"
->>>>>>> 306ecee2898d96dd8c9415d384c61488319b0417
       }
     },
     {

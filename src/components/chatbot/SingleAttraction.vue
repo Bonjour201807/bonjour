@@ -6,13 +6,8 @@
           <img src="../../assets/images/uicon.jpg">
         </mu-avatar> -->
       <!-- </mu-card-header> -->
-<<<<<<< HEAD
       <div v-if="mode==='list'" style="height:130px">
         <mu-card-media :title="message.name" style="font-size: 20px;">
-=======
-      <template v-if="mode==='list'">
-        <mu-card-media :title="message.name" style="font-size: 14px;">
->>>>>>> 306ecee2898d96dd8c9415d384c61488319b0417
           <img :src="picture.filepath">
         </mu-card-media>
       </div>
