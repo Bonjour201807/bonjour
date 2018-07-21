@@ -2,7 +2,7 @@
     <div>
       <div id="header">
         <mu-appbar :title="user.name" :zDepth="0">
-            <mu-icon-button icon="arrow_back" slot="left"/>
+            <el-button icon="el-icon-back" circle slot="left"/></el-button>
         </mu-appbar>
       </div>
       <div id="content">
@@ -11,9 +11,15 @@
         <div class="patch-2"></div>
       </div>
       <div id="footer">
-          <input type="text" name="" class="input" value=""
-                 v-model="text" @keyup.enter="addUserInput">
-          <button type="button" name="button" @click="addUserInput">发送</button>
+          <el-input
+            class="elinput"
+            type="textarea"
+            placeholder="请输入内容"
+            v-model="text"
+            size="small"
+            style="width:250px"
+            @keyup.enter.native="addUserInput"/>
+          <el-button class="elbutton" type="primary" name="button"  size="small"  @click="addUserInput">发送</el-button>
       </div>
     </div>
 </template>
@@ -53,7 +59,7 @@ export default {
   },
   methods: {
     addUserInput() {
-      if (this.text.length) {
+      if (this.text.length && this.text != "\n") {
         this.$store.dispatch("sendValue", {
           id: this.userData.user.id,
           message: { text: this.text },
@@ -104,6 +110,9 @@ export default {
   /* min-width: 200px; */
   margin: 15px 0;
   line-height: 30px;
+}
+.elinput {
+  padding-top: 10px;
 }
 
 #footer {

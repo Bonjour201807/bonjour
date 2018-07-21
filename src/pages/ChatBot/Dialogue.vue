@@ -9,7 +9,9 @@
               <!-- flag=0，显示纯文本信息，由于用户发送的消息没有 flag 标识而且都是纯文本
                    所以为了显示用户消息需要增加一个判断 -->
               <template v-if="item.flag===0 || item.self===true">
-                {{item.message.text}}
+                <div style="max-width:250px">
+                  {{item.message.text}}
+                </div>
               </template>
               <!-- flag=1，显示获取出发地和出行时间的组件 -->
               <template v-if="item.flag===1">
@@ -155,6 +157,8 @@ export default {
 <style lang="scss" scoped>
 .wrap {
   font-size: 16px;
+  white-space: normal;
+  word-break: break-all;
   background-color: #f4f4f6;
   .content {
     display: inline-block;
