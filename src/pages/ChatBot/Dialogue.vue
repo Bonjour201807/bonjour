@@ -10,45 +10,45 @@
                    所以为了显示用户消息需要增加一个判断 -->
               <template v-if="item.flag===0 || item.self===true">
                 {{item.message.text}}
-                
               </template>
-              
               <!-- flag=1，显示获取出发地和出行时间的组件 -->
               <template v-if="item.flag===1">
-                  <p>请选择出发地和出行时间：</p>
-                  <select-place :local="local"></select-place>
-                  <div class="to-day">
-                    <p>出行天数:
-                      <el-input-number v-model="days" :min="1" size="mini">
-                      </el-input-number>
-                    </p>
-                  </div>
-                  <mt-button size="small" @click="addLocationDays">确定</mt-button>
+                {{item.message.text}}
+                <p>请选择出发地和出行时间：</p>
+                <select-place :local="local"></select-place>
+                <div class="to-day">
+                  <p>出行天数:
+                    <el-input-number v-model="days" :min="1" size="mini">
+                    </el-input-number>
+                  </p>
+                </div>
+                <mt-button size="small" @click="addLocationDays(item.flag)">确定</mt-button>
               </template>
               <!-- flag=2，显示获取用户感兴趣标签的组件 -->
+              <!-- 可以考虑去掉‘取消’按钮，如果用户什么标签都没选也没输入，不应该返回信息，这里的逻辑需要修改 -->
               <template v-if="item.flag===2">
                 {{item.message.text}}
                 <p></p>
                 <div>
                   <span v-for="(tag,index) in item.message.tags" v-if="index%2===0">
-                  <el-button size="mini" v-model="arr[index]" :type="arr[index] === 1 ? 'primary' : 'info'" @click="handleapply(index)" round >{{tag}}</el-button>
+                  <el-button size="mini" v-model="arr[index]" :type="arr[index] === 1 ? 'primary' : 'info'" @click="handleApply(index)" round >{{tag}}</el-button>
                   &nbsp;
                   </span>
                   </div>
                   <p></p>
                   <div>
                   <span v-for="(tag,index) in item.message.tags" v-if="index%2===1">
-                  <el-button size="mini" v-model="arr[index]" :type="arr[index] === 1 ? 'primary' : 'info'" @click="handleapply(index)" round >{{tag}}</el-button>
+                  <el-button size="mini" v-model="arr[index]" :type="arr[index] === 1 ? 'primary' : 'info'" @click="handleApply(index)" round >{{tag}}</el-button>
                   &nbsp;
                   </span>
                   <p></p>
                   其它
                   <p></p>
-                  <el-input type="textarea" v-model="inputtag" placeholder="输入感兴趣的景色，如森林、草甸"></el-input>
+                  <el-input type="textarea" v-model="input_tag" placeholder="输入感兴趣的景色，如森林、草甸"></el-input>
                   <p></p>
-                  <el-button size="mini" type='primary' @click="submittag(index)" round >提交</el-button>
-                  &nbsp;
-                  <el-button size="mini" type='primary' @click="submittag(index)" round >不想选</el-button>
+                  <el-button size="mini" type='primary' @click="submitTag(index, item.flag)" round >提交</el-button>
+                  &nbsp; <!-- 这里的 index 是指当前显示的 item 在 nowMessageList 中的 index -->
+                  <el-button size="mini" type='primary' @click="submitTag(index, item.flag)" round >不想选</el-button>
                 </div>
               </template>
               <!-- flag=3，展示推荐列表的组件 -->
@@ -62,12 +62,15 @@
               <!-- flag=5，展示近期天气的组件 -->
               <template v-if="item.flag===5">
                 <div style="margin: 5px">
+<<<<<<< HEAD
                     <iframe name="weather_inc" :src="item.message.address" width="170" height="400" frameborder="0" marginwidth="200" marginheight="0" scrolling="no"></iframe>
+=======
+                    <iframe name="weather_inc" :src="item.message.weather_url" width="250" height="440" frameborder="0" marginwidth="200" marginheight="0" scrolling="no"></iframe>
+>>>>>>> 306ecee2898d96dd8c9415d384c61488319b0417
                 </div>
               </template>
               <!-- flag=6，地图展示附近景点的组件 -->
               <template v-if="item.flag===6">
-                <!-- <weather :lng="item.longitude" :lat="item.latitude"></weather> -->
                   <map-gd :lng="item.message.longitude" :lat="item.message.latitude" :path="item.message.path" :markers="item.message.markers" ></map-gd>
               </template>
             </span>
@@ -94,8 +97,7 @@ export default {
     return {
       days: 0,
       arr: [0, 0, 0, 0, 0, 0],
-      todo: "",
-      inputtag: ""
+      input_tag: ""
     };
   },
   computed: {
@@ -106,60 +108,42 @@ export default {
     ...mapGetters(["nowMessageList"])
   },
   methods: {
-    handleapply(index) {
+    handleApply(index) {
       this.$set(this.arr, index, 1 - this.arr[index]);
     },
-    submittag() {
-      var interesttags = "";
-      var selecttags = [];
+    submitTag(index, flag) {
+      var interest_tags = "";
+      var select_tags = [];
       for (var i = 0; i < this.arr.length; ++i) {
-        console.log(interesttags);
         if (this.arr[i] === 1) {
-          selecttags.push(
-            this.nowMessageList[this.nowMessageList.length - 1].message.tags[i]
-          );
-          console.log(this.nowMessageList);
-          if (interesttags.length === 0)
-            interesttags = this.nowMessageList[this.nowMessageList.length - 1]
-              .message.tags[i];
+          select_tags.push(this.nowMessageList[index].message.tags[i]);
+          if (interest_tags.length === 0)
+            interest_tags = this.nowMessageList[index].message.tags[i];
           else
-            interesttags +=
-              "、" +
-              this.nowMessageList[this.nowMessageList.length - 1].message.tags[
-                i
-              ];
+            interest_tags += "、" + this.nowMessageList[index].message.tags[i];
         }
       }
-      console.log(interesttags);
-      if (interesttags.length === 0) {
-        interesttags = this.inputtag;
-      } else if (this.inputtag != 0) {
-        interesttags += "、" + this.inputtag;
+      console.log(interest_tags);
+      if (interest_tags.length === 0) {
+        interest_tags = this.input_tag;
+      } else if (this.input_tag != 0) {
+        interest_tags += "、" + this.input_tag;
       }
       this.$store.dispatch("sendValue", {
         id: this.userData.user.id,
+        user_flag: flag,
         message: {
-          text: "".concat("感兴趣的标签：", interesttags),
-          inputtag: this.inputtag,
-          selecttags: selecttags
+          text: "".concat("感兴趣的标签：", interest_tags),
+          input_tag: this.input_tag,
+          select_tags: select_tags
         }
       });
-      console.log("".concat("感兴趣的标签：", interesttags));
+      console.log("".concat("感兴趣的标签：", interest_tags));
     },
-    addTodo() {
-      if (this.todo.length) {
-        this.$store.dispatch("sendValue", {
-          message: { text: this.todo },
-          id: this.userData.user.id
-        });
-      } else {
-        console.log("不能为空");
-      }
-      this.todo = "";
-    },
-    addLocationDays() {
+    addLocationDays(flag) {
       this.$store.dispatch("sendValue", {
         id: this.userData.user.id,
+        user_flag: flag,
         message: {
           text: "".concat(this.selectedPlace, "出发, 玩", this.days, "天"),
           departure: this.selectedPlace,
