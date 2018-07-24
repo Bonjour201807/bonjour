@@ -63,9 +63,7 @@
               </template>
               <!-- flag=5，展示近期天气的组件 -->
               <template v-if="item.flag===5">
-                <div style="margin: 5px">
-                    <iframe name="weather_inc" :src="item.message.address" width="170" height="400" frameborder="0" marginwidth="200" marginheight="0" scrolling="no"></iframe>
-                </div>
+                <weather :destination="item.message.local"></weather>
               </template>
               <!-- flag=6，地图展示附近景点的组件 -->
               <template v-if="item.flag===6">
@@ -85,12 +83,12 @@ import SelectPlace from "@/components/chatbot/SelectPlace";
 import SingleAttraction from "@/components/chatbot/SingleAttraction";
 import RecList from "@/components/chatbot/RecList";
 import SearchBar from "@/components/SearchBar";
-import Weather from "@/components/Weather";
+import Weather from "@/components/chatbot/ChatBotWeather";
 
 export default {
   name: "dialogue",
   props: ["userData"],
-  components: { MapGd, SelectPlace, SingleAttraction, RecList },
+  components: { MapGd, SelectPlace, SingleAttraction, RecList, Weather },
   data() {
     return {
       days: 0,

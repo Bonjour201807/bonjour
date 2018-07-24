@@ -2,7 +2,7 @@
     <div>
       <div id="header">
         <mu-appbar :title="user.name" :zDepth="0">
-            <el-button icon="el-icon-close" circle type="info" slot="left"/></el-button>
+            <!-- <el-button icon="el-icon-close" circle type="info" slot="left"/></el-button> -->
         </mu-appbar>
       </div>
       <div id="content">
@@ -54,7 +54,7 @@ export default {
     nowMessageList: function() {
       this.$nextTick(() => {
         document.body.scrollTop = document.body.scrollHeight;
-        // console.log(document.body.scrollTop);
+        console.log(document.body.scrollTop);
       });
     }
   },
