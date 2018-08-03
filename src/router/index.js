@@ -32,7 +32,7 @@ export default new Router({
       component: AttractionList
     },
     {
-      path: '/attraction/:id',
+      path: '/attraction/:sid',
       name: 'Attraction',
       component: Attraction
     },

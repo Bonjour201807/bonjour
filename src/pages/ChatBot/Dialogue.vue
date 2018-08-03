@@ -8,9 +8,14 @@
             <span class="content" style="color: rgba(0, 0, 0, .9)">
               <!-- flag=0，显示纯文本信息，由于用户发送的消息没有 flag 标识而且都是纯文本
                    所以为了显示用户消息需要增加一个判断 -->
-              <template v-if="item.flag===0 || item.self===true">
+              <template v-if="item.flag===0">
                 <div style="max-width:250px;line-height:22px">
                   {{item.message.text}}
+                </div>
+              </template>
+              <template v-if="item.self===true">
+                <div style="max-width:250px;line-height:22px">
+                  {{item.message.query}}
                 </div>
               </template>
               <!-- flag=1，显示获取出发地和出行时间的组件 -->

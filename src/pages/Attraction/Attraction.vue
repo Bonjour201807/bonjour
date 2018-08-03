@@ -54,12 +54,12 @@ export default {
   },
   created() {
     // Getting route params
-    const id = this.$route.params.id;
+    const sid = this.$route.params.sid;
     // Dispatching getSingleEvent
     this.$store
       .dispatch({
         type: "getSingleEvent",
-        id: id
+        sid: sid
       })
       .then(res => {
         // Success handle

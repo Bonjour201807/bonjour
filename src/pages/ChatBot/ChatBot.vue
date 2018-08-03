@@ -54,7 +54,7 @@ export default {
     nowMessageList: function() {
       this.$nextTick(() => {
         document.body.scrollTop = document.body.scrollHeight;
-        console.log(document.body.scrollTop);
+        // console.log(document.body.scrollTop);
       });
     }
   },
@@ -62,11 +62,11 @@ export default {
     addUserInput() {
       if (this.text.length && this.text != "\n") {
         this.$store.dispatch("sendValue", {
-          id: this.userData.user.id,
-          message: { text: this.text },
+          uid: this.userData.user.uid,
+          message: { query: this.text },
           user_flag: 0
         });
-        console.log(this.text);
+        // console.log(this.text);
       } else {
         console.log("不能为空");
       }
@@ -101,7 +101,7 @@ export default {
 }
 
 .patch-2 {
-  height: 70px;
+  height: 75px;
 }
 
 .input {

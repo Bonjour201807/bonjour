@@ -60,16 +60,16 @@ const actions = {
 
     /**
      * Getting single event
-     * id: event id
+     * sid: attraction sid
      */
     getSingleEvent({ commit, state }, payload) {
         return new Promise((resolve, reject) => {
-            axios.get(''.concat('/mock/bonjour', payload.id))
+            axios.get(''.concat('/mock/bonjour', payload.sid))
                 .then((res) => {
                     commit('getSingleEvent', res.data)
                     resolve(res.data)
                 })
-            // .get("http://182.254.227.188:45678/v1/api/attractions/"  + payload.id)
+            // .get("http://182.254.227.188:45678/v1/api/attractions/"  + payload.sid)
             // .get('https://api.douban.com/v2/event/' + payload.id)
             // .then((err, res) => {
             //     if (!err) {

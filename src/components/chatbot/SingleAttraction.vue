@@ -1,5 +1,5 @@
 <template>
-  <router-link :to="{name: 'Attraction', params: { id: message.id }}" append>
+  <router-link :to="{name: 'Attraction', params: { sid: message.sid }}" append>
     <mu-card style="box-shadow: none; width: 100%; max-width: 200px; max-height: 400px;margin: 0 auto;">
       <!-- <mu-card-header> -->
         <!-- <mu-avatar slot="avatar">
@@ -8,12 +8,12 @@
       <!-- </mu-card-header> -->
       <div v-if="mode==='list'" style="height:130px">
         <mu-card-media :title="message.name" style="font-size: 20px;">
-          <img :src="picture.filepath">
+          <img :src="message.pic_path">
         </mu-card-media>
       </div>
       <div v-else>
         <mu-card-media :title="message.name">
-          <img :src="picture.filepath">
+          <img :src="message.pic_path">
         </mu-card-media>
       </div>
       <!-- <mu-card-title title="Content Title" sub-title="Content Title"></mu-card-title> -->
@@ -52,9 +52,7 @@ export default {
   props: ["message", "mode"],
   components: { Tags },
   data() {
-    return {
-      picture: this.message.pic[0]
-    };
+    return {};
   }
 };
 </script>

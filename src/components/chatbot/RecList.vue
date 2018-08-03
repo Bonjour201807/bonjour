@@ -4,8 +4,8 @@
       <!-- <slot name="promItem"></slot> -->
       <ul class="hasCover">
         <swiper :options="swiperOption" ref="mySwiper" class="swiper">
-          <swiper-slide v-for="item in detail" class="swiper-slide">
-            <router-link :to="{name: 'Attraction', params: { id: item.id }}" append>
+          <swiper-slide v-for="(item, index) in detail" :key="index" class="swiper-slide">
+            <router-link :to="{name: 'Attraction', params: { sid: item.sid }}" append>
               <single-attraction :message="item" mode="list"></single-attraction>
               <!-- <img v-if="item.images" :src="item.images.large" alt="">
               <span class="title">{{item.title}}</span> -->

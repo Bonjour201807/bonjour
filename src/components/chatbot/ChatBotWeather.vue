@@ -1,8 +1,5 @@
 <template>
    <div class="weather-container">
-        <!-- <p>citycode: {{ citycode }}</p>
-        <p>维度：{{ lat }}</p>
-        <p>经度：{{ lng }}</p> -->
         <weather-detail :weatherdata="weatherdata" :lifedata="lifedata" v-if="flag"></weather-detail>
     </div>
 </template>
