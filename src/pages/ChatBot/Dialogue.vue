@@ -27,7 +27,8 @@
                 <mt-button size="small" @click="addLocationDays(item.flag)">确定</mt-button>
               </template>
               <!-- flag=2，显示获取用户感兴趣标签的组件 -->
-              <!-- 可以考虑去掉‘取消’按钮，如果用户什么标签都没选也没输入，不应该返回信息，这里的逻辑需要修改 -->
+              <!-- 可以考虑去掉‘取消’按钮，如果用户什么标签都没选也没输入，返回默认列表信息，这里的逻辑需要修改 -->
+              <!-- 可以将‘取消’按钮改成‘换一批’ -->
               <template v-if="item.flag===2">
                 {{item.message.text}}
                 <p></p>
