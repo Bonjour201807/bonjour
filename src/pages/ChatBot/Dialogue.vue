@@ -8,7 +8,7 @@
             <span class="content" style="color: rgba(0, 0, 0, .9)">
               <!-- flag=0，显示纯文本信息，由于用户发送的消息没有 flag 标识而且都是纯文本
                    所以为了显示用户消息需要增加一个判断 -->
-              <template v-if="item.flag===0">
+              <template v-if="item.flag===0 || item.self===true">
                 <div style="max-width:250px;line-height:22px">
                   {{item.message.text}}
                 </div>
@@ -32,7 +32,8 @@
                 <mt-button size="small" @click="addLocationDays(item.flag)">确定</mt-button>
               </template>
               <!-- flag=2，显示获取用户感兴趣标签的组件 -->
-              <!-- 可以考虑去掉‘取消’按钮，如果用户什么标签都没选也没输入，不应该返回信息，这里的逻辑需要修改 -->
+              <!-- 可以考虑去掉‘取消’按钮，如果用户什么标签都没选也没输入，返回默认列表信息，这里的逻辑需要修改 -->
+              <!-- 可以将‘取消’按钮改成‘换一批’ -->
               <template v-if="item.flag===2">
                 {{item.message.text}}
                 <p></p>
@@ -68,7 +69,7 @@
               </template>
               <!-- flag=5，展示近期天气的组件 -->
               <template v-if="item.flag===5">
-                <weather :destination="item.message.local"></weather>
+                <weather :destination="item.message.local" :date="item.message.date"></weather>
               </template>
               <!-- flag=6，地图展示附近景点的组件 -->
               <template v-if="item.flag===6">

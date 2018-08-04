@@ -1,10 +1,10 @@
 <template>
     <div>
-      <div id="header">
-        <mu-appbar :title="user.name" :zDepth="0">
+      <!-- <div id="header"> -->
+        <!-- <mu-appbar :title="user.name" :zDepth="0"> -->
             <!-- <el-button icon="el-icon-close" circle type="info" slot="left"/></el-button> -->
-        </mu-appbar>
-      </div>
+        <!-- </mu-appbar> -->
+      <!-- </div> -->
       <div id="content">
         <div class="patch-1"></div>
         <dialogue :userData="userData" id="dailogue" name="dailogue"></dialogue>
@@ -97,7 +97,7 @@ export default {
 }
 
 .patch-1 {
-  height: 64px;
+  height: 10px;
 }
 
 .patch-2 {
