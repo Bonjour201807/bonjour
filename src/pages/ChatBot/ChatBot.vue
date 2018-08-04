@@ -63,7 +63,7 @@ export default {
       if (this.text.length && this.text != "\n") {
         this.$store.dispatch("sendValue", {
           id: this.userData.user.id,
-          message: { text: this.text },
+          message: { query: this.text },
           user_flag: 0
         });
         console.log(this.text);
