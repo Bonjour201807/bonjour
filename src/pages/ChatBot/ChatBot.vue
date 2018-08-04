@@ -1,10 +1,10 @@
 <template>
     <div>
-      <div id="header">
-        <mu-appbar :title="user.name" :zDepth="0">
+      <!-- <div id="header"> -->
+        <!-- <mu-appbar :title="user.name" :zDepth="0"> -->
             <!-- <el-button icon="el-icon-close" circle type="info" slot="left"/></el-button> -->
-        </mu-appbar>
-      </div>
+        <!-- </mu-appbar> -->
+      <!-- </div> -->
       <div id="content">
         <div class="patch-1"></div>
         <dialogue :userData="userData" id="dailogue" name="dailogue"></dialogue>
@@ -54,7 +54,7 @@ export default {
     nowMessageList: function() {
       this.$nextTick(() => {
         document.body.scrollTop = document.body.scrollHeight;
-        console.log(document.body.scrollTop);
+        // console.log(document.body.scrollTop);
       });
     }
   },
@@ -62,11 +62,11 @@ export default {
     addUserInput() {
       if (this.text.length && this.text != "\n") {
         this.$store.dispatch("sendValue", {
-          id: this.userData.user.id,
+          uid: this.userData.user.uid,
           message: { query: this.text },
           user_flag: 0
         });
-        console.log(this.text);
+        // console.log(this.text);
       } else {
         console.log("不能为空");
       }
@@ -97,11 +97,11 @@ export default {
 }
 
 .patch-1 {
-  height: 64px;
+  height: 10px;
 }
 
 .patch-2 {
-  height: 70px;
+  height: 75px;
 }
 
 .input {

@@ -10,7 +10,7 @@
         <slot name="promItem"></slot>
         <ul class="hasCover" v-if="type === 'hasCover'">
           <li v-for="item in items">
-            <router-link :to="'subject/' + item.id" append>
+            <router-link :to="'subject/' + item.sid" append>
               <img v-if="item.images" :src="item.images.large" alt="">
               <span class="title">{{item.title}}</span>
               <!-- <rating v-if="item.rating" :rating="item.rating"></rating> -->

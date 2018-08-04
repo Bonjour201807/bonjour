@@ -3,7 +3,7 @@
     <template v-if="mold === 'thumbnail'" v-for="item in items">
       <router-link
         class="thumbnail"
-        :to="{name: 'Attraction', params: { id: item.id }}">
+        :to="{name: 'Attraction', params: { sid: item.sid }}">
         <div class="content">
           <img src='../assets/pic/bon-1.png'>
           <!-- <img :src="item.image_hlarge" alt="cover"> -->

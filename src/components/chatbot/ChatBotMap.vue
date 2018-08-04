@@ -3,7 +3,7 @@
    <div class="amap-wrapper">
         <el-amap :vid="mapid" :center="[lng,lat]" :path="path" :zoom="zoom" :plugin="plugin">
             <el-amap-marker :position="[lng,lat]" :isHotspot="open"></el-amap-marker>
-            <el-amap-marker  v-for="(marker, index) in markers" :position="marker.position" :visible="marker.visible" :draggable="marker.draggable" :vid="index" :label="marker.label"></el-amap-marker>
+            <el-amap-marker  v-for="(marker, index) in markers" :key="index" :position="marker.position" :visible="marker.visible" :draggable="marker.draggable" :vid="index" :label="marker.label"></el-amap-marker>
             <el-amap-polyline  :path="path" ></el-amap-polyline>
             <!-- <el-amap-marker v-for="(marker,index) in markers" :key="index" :position="marker.position" :isHotspot="open" ></el-amap-marker> -->
         </el-amap>

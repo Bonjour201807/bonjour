@@ -13,6 +13,11 @@
                   {{item.message.text}}
                 </div>
               </template>
+              <template v-if="item.self===true">
+                <div style="max-width:250px;line-height:22px">
+                  {{item.message.query}}
+                </div>
+              </template>
               <!-- flag=1，显示获取出发地和出行时间的组件 -->
               <template v-if="item.flag===1">
                 {{item.message.text}}

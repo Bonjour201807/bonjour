@@ -1,9 +1,6 @@
 <template>
    <div class="weather-container">
-        <!-- <p>citycode: {{ citycode }}</p>
-        <p>维度：{{ lat }}</p>
-        <p>经度：{{ lng }}</p> -->
-        <weather-detail :weatherdata="weatherdata" :lifedata="lifedata" :weatherdate="weatherdate" v-if="flag"></weather-detail>
+        <weather-detail :weatherdata="weatherdata" :weatherdate="weatherdate" :lifedata="lifedata" v-if="flag"></weather-detail>
     </div>
 </template>
 
@@ -27,7 +24,6 @@ export default {
   mounted() {
     this.getWeather();
     this.getLife();
-    // this.getWeatherdate();
   },
 
   methods: {
@@ -42,7 +38,7 @@ export default {
           var res = res.data;
           // this.$store.state.weatherdata = res;
           this.weatherdata = res;
-          console.log(this.weatherdata);
+          // console.log(this.weatherdata);
           this.flag = true;
           var weatherdate_lst = this.startdate.split(" ");
           var weatherindex_lst = this.deltadate.split(" ");
@@ -52,12 +48,14 @@ export default {
           var arr = this.weatherdata.HeWeather6[0].daily_forecast;
           // console.log(arr);
           for (var j = 0; j < arr.length; j++) {
-            // console.log(arr[j].date);
+            console.log("0");
+            console.log(arr[j].date);
             if (arr[j].date === weatherdate) {
               // console.log(arr[j].date);
               var new_arr = arr.slice(j, j + weatherindex);
               // console.log(cnew_arr);
               this.weatherdate = new_arr;
+              console.log("1");
               console.log(this.weatherdate);
             }
           }
@@ -73,7 +71,7 @@ export default {
         .then(res => {
           var res = res.data;
           this.lifedata = res;
-          console.log(this.lifedata);
+          // console.log(this.lifedata);
         });
     }
   }
