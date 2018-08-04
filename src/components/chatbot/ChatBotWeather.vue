@@ -14,7 +14,7 @@ import WeatherDetail from "./ChatBotWeatherDetail";
 
 export default {
   name: "weather",
-  props: ["destination", "date"],
+  props: ["destination", "startdate", "deltadate"],
   components: { WeatherDetail },
   data() {
     return {
@@ -44,8 +44,8 @@ export default {
           this.weatherdata = res;
           console.log(this.weatherdata);
           this.flag = true;
-          var weatherdate_lst = this.date[0].split(" ");
-          var weatherindex_lst = this.date[1].split(" ");
+          var weatherdate_lst = this.startdate.split(" ");
+          var weatherindex_lst = this.deltadate.split(" ");
           var weatherdate = weatherdate_lst[0];
           // console.log(weatherdate);
           var weatherindex = parseInt(weatherindex_lst[0]);
@@ -75,20 +75,6 @@ export default {
           this.lifedata = res;
           console.log(this.lifedata);
         });
-    },
-    getWeatherdate() {
-      var weatherdate_lst = this.date[0].split(" ");
-      var weatherindex_lst = this.date[1].split(" ");
-      var weatherdate = weatherdate_lst[0];
-      console.log(weatherdate);
-      var weatherindex = parseInt(weatherindex_lst[0]);
-      var arr = weath.HeWeather6[0].daily_forecast;
-      for (j = 0; j < arr.length; j++) {
-        if (arr[j] === weatherdate) {
-          var new_arr = arr[(j, j + weatherindex)];
-          this.weatherdate = new_arr;
-        }
-      }
     }
   }
   //   computed: {

@@ -63,7 +63,7 @@
               </template>
               <!-- flag=5，展示近期天气的组件 -->
               <template v-if="item.flag===5">
-                <weather :destination="item.message.local" :date="item.message.date"></weather>
+                <weather :destination="item.message.local" :startdate="item.message.start_time" :deltadate="item.message.delta_time"></weather>
               </template>
               <!-- flag=6，地图展示附近景点的组件 -->
               <template v-if="item.flag===6">
