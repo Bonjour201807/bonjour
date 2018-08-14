@@ -11,7 +11,11 @@ import WeatherDetail from "./ChatBotWeatherDetail";
 
 export default {
   name: "weather",
+<<<<<<< HEAD
   props: ["message"],
+=======
+  props: ["destination", "startdate", "deltadate"],
+>>>>>>> 241ba4d79d90c54350cb77c49bdb6c568394b9b6
   components: { WeatherDetail },
   data() {
     return {
@@ -40,8 +44,13 @@ export default {
           this.weatherdata = res;
           // console.log(this.weatherdata);
           this.flag = true;
+<<<<<<< HEAD
           var weatherdate_lst = this.message.start_time.split(" ");
           var weatherindex_lst = this.message.delta_time.split(" ");
+=======
+          var weatherdate_lst = this.startdate.split(" ");
+          var weatherindex_lst = this.deltadate.split(" ");
+>>>>>>> 241ba4d79d90c54350cb77c49bdb6c568394b9b6
           var weatherdate = weatherdate_lst[0];
           // console.log(weatherdate);
           var weatherindex = parseInt(weatherindex_lst[0]);
