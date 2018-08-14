@@ -45,11 +45,13 @@ const actions = {
     // 获取列表信息
     getListsInfo({ commit }, payload) {
         return new Promise((reslove, reject) => {
-            axios.get('/mock/lists').then((res) => {
-                //模拟分页 默认6个
-                let datas = res.data.slice(0, 6);
-                commit(ADD_LISTS_INFO, datas);
-                reslove(datas);
+            axios.get('http://182.254.227.188:45678/v1/api/attractions', {
+                scroll_id: payload.scroll_id
+            }).then((res) => {
+                // //模拟分页 默认6个
+                // let datas = res.data.slice(0, 6);
+                commit(ADD_LISTS_INFO, res.data);
+                reslove(res.data);
             })
         })
     }

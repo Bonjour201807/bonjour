@@ -11,7 +11,7 @@ import WeatherDetail from "./ChatBotWeatherDetail";
 
 export default {
   name: "weather",
-  props: ["destination", "date"],
+  props: ["message"],
   components: { WeatherDetail },
   data() {
     return {
@@ -31,7 +31,7 @@ export default {
       axios
         .get(
           "https://free-api.heweather.com/s6/weather/forecast?&location=" +
-            this.destination +
+            this.message.local +
             "&key=1acdfb31bc4e465a96b428d43e5367e9"
         )
         .then(res => {
@@ -40,23 +40,21 @@ export default {
           this.weatherdata = res;
           // console.log(this.weatherdata);
           this.flag = true;
-          var weatherdate_lst = this.date[0].split(" ");
-          var weatherindex_lst = this.date[1].split(" ");
+          var weatherdate_lst = this.message.start_time.split(" ");
+          var weatherindex_lst = this.message.delta_time.split(" ");
           var weatherdate = weatherdate_lst[0];
           // console.log(weatherdate);
           var weatherindex = parseInt(weatherindex_lst[0]);
           var arr = this.weatherdata.HeWeather6[0].daily_forecast;
           // console.log(arr);
           for (var j = 0; j < arr.length; j++) {
-            console.log("0");
-            console.log(arr[j].date);
+            // console.log(arr[j].date);
             if (arr[j].date === weatherdate) {
               // console.log(arr[j].date);
               var new_arr = arr.slice(j, j + weatherindex);
               // console.log(cnew_arr);
               this.weatherdate = new_arr;
-              console.log("1");
-              console.log(this.weatherdate);
+              // console.log(this.weatherdate);
             }
           }
         });
@@ -65,7 +63,7 @@ export default {
       axios
         .get(
           "https://free-api.heweather.com/s6/weather/lifestyle?parameters&location=" +
-            this.destination +
+            this.message.local +
             "&key=1acdfb31bc4e465a96b428d43e5367e9"
         )
         .then(res => {

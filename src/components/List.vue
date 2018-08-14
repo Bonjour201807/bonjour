@@ -5,7 +5,7 @@
         class="thumbnail"
         :to="{name: 'Attraction', params: { sid: item.sid }}">
         <div class="content">
-          <img src='../assets/pic/bon-1.png'>
+          <img src='../../static/pic/bon-1.png'>
           <!-- <img :src="item.image_hlarge" alt="cover"> -->
           <h3>{{item.name}}</h3>
           <p><b>看点:&nbsp;&nbsp;</b>

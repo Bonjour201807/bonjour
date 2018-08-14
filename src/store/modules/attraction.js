@@ -10,11 +10,12 @@ const state = {
 // Get the list of pictures for a single attraction
 const getters = {
     slides() {
-        let filepaths = state.attractionItem.pic;
+        let filepaths = state.attractionItem.pics;
         let slides = [];
         filepaths.map(data =>
             slides.push(
                 data.filepath
+                // axios.defaults.baseURL.concat(data.filepath)
             ),
         );
         return slides;
@@ -26,8 +27,10 @@ const mutations = {
         state.skip += 3
         state.attractions = state.attractions.concat(payload)
     },
-    getSingleEvent(state, payload) {
-        state.attractionItem = payload
+    getSingleEvent(state, data) {
+        state.attractionItem = data
+        console.log("test_attractionItem")
+        console.log(data)
     }
 }
 
@@ -39,22 +42,11 @@ const actions = {
      */
     loadMore({ commit, state }) {
         return new Promise((resolve, reject) => {
-            axios.get('/mock/bonjour')
+            axios.get('http://182.254.227.188:45678/v1/api/attractions')
                 .then((res) => {
-                    commit('loadMore', res.data.data)
-                    resolve(res.data.data)
+                    commit('loadMore', res.data)
+                    resolve(res.data)
                 })
-            // .get("http://182.254.227.188:45678/v1/api/attractions/list/")
-            // .get('https://api.douban.com/v2/event/list?loc=108288&start=' +
-            //     state.skip + '&count=3')
-            // .then((err, res) => {
-            //     console.log(res)
-            //     // console.log(res.data.data)
-            //     if (!err) {
-            //         commit('loadMore', res.data.data)
-            //         resolve(res)
-            //     }
-            // })
         })
     },
 
@@ -62,24 +54,17 @@ const actions = {
      * Getting single event
      * sid: attraction sid
      */
-    getSingleEvent({ commit, state }, payload) {
+    getSingleEvent({ commit, state }, { sid }) {
         return new Promise((resolve, reject) => {
-            axios.get(''.concat('/mock/bonjour', payload.sid))
+            axios.get('http://182.254.227.188:45678/v1/api/attractions', {
+                params: {
+                    id: sid
+                }
+            })
                 .then((res) => {
                     commit('getSingleEvent', res.data)
                     resolve(res.data)
                 })
-            // .get("http://182.254.227.188:45678/v1/api/attractions/"  + payload.sid)
-            // .get('https://api.douban.com/v2/event/' + payload.id)
-            // .then((err, res) => {
-            //     if (!err) {
-            //         commit({
-            //             type: 'getSingleEvent',
-            //             res: res.body
-            //         })
-            //         resolve(res)
-            //     }
-            // })
         })
     }
 }

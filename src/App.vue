@@ -13,7 +13,9 @@ export default {
     FooterBar
   },
   created() {
+    // 组件创建时，进行异步数据数据请求
     this.$store.dispatch("getLocation");
+    this.$store.dispatch("getAllData", this);
   }
 };
 </script>

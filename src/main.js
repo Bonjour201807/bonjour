@@ -16,6 +16,8 @@ import 'muse-ui/dist/theme-carbon.css';
 Vue.use(ElementUI);
 Vue.use(MuseUI)
 import axios from "axios";
+axios.defaults.baseURL = BASE_URL;
+
 import VueAMap from 'vue-amap';
 Vue.use(VueAMap);
 
@@ -53,9 +55,5 @@ new Vue({
     router,
     store,
     template: '<App/>',
-    components: { App },
-    // 组件创建前，进行异步数据数据请求
-    beforeCreate() {
-        this.$store.dispatch('getAllData', this)
-    }
+    components: { App }
 })

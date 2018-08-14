@@ -27,7 +27,9 @@ export default {
     ...mapGetters(["colorTags"])
   },
   created() {
-    this.$store.dispatch("getListsInfo");
+    this.$store.dispatch("getListsInfo", {
+      scroll_id: 0
+    });
   }
 };
 </script>

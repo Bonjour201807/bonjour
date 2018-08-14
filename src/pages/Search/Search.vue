@@ -32,7 +32,7 @@
         <h1>热门标签</h1> 
         <div class="text">
           <div class="box" v-for="item in hotTags">
-          {{item.name}}
+          {{item}}
           </div>
         </div>
       </div>
@@ -78,7 +78,7 @@ export default {
   },
   computed: {
     ...mapState({
-      hotTags: state => state.searchInfo.hotTags,
+      hotTags: state => state.searchInfo.hotTags.data,
       hotPlace: state => state.searchInfo.hotPlace,
       searchHistory: state => state.searchInfo.searchHistory,
       searchResult: state => state.searchInfo.searchResult,
@@ -88,7 +88,9 @@ export default {
     })
   },
   created() {
-    this.$store.dispatch("getHotTags");
+    this.$store.dispatch("getHotTags", {
+      scroll_id: 0
+    });
     this.$store.dispatch("getHotPlace");
     this.$store.dispatch("getHistory");
   }

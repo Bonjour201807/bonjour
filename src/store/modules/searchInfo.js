@@ -10,31 +10,35 @@ import {
 
 const state = {
   hotPlace: [],
-  hotTags: [],
+  hotTags: {},
   searchHistory: [],
   searchResult: {},
   SearchDay: ''
 }
 
 const actions = {
-  getHotTags({ commit }, payload) {
-    axios.get('/mock/hottag').then((res) => {
+  getHotTags({ commit }, { scroll_id }) {
+    axios.get('http://182.254.227.188:45678/v1/api/tags', {
+      params: {
+        scroll_id: scroll_id
+      }
+    }).then((res) => {
       commit(SAVE_HOT_TAGS, res.data);
     })
   },
   getHotPlace({ commit }, payload) {
-    axios.get('/mock/hotplace').then((res) => {
+    axios.get('http://182.254.227.188:45678/v1/api/hotplace').then((res) => {
       commit(SAVE_HOT_PLACE, res.data);
     })
   },
   getHistory({ commit }, payload) {
-    axios.get('/mock/history').then((res) => {
+    axios.get('http://182.254.227.188:45678/v1/api/history').then((res) => {
       commit(SAVE_HISTORY, res.data);
     })
   },
   getSearchResult({ state, commit, rootState }, payload) {
     let query = ['key=' + payload, 'day=' + state.SearchDay, 'place=' + rootState.userInfo.local].join('&')
-    axios.get('/api/search?' + query).then(res => {
+    axios.get('http://182.254.227.188:45678/v1/api/search?' + query).then(res => {
       commit(SAVE_SEARCH_RESULT, res.data)
     })
   },

@@ -25,7 +25,7 @@ const actions = {
     commit(SAVE_LOCATION)
   },
   getAreaList({ commit }) {
-    axios.get('/mock/areaInfo').then((res) => {
+    axios.get('http://182.254.227.188:45678/v1/api/areaInfo').then((res) => {
       commit(SAVE_AREA_LIST, res.data);
     })
   },

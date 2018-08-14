@@ -10,7 +10,7 @@ import ChatBot from '../pages/ChatBot'
 Vue.use(Router)
 
 export default new Router({
-  mode: 'history',
+  // mode: 'history',
   routes: [
     // {
     //   path: '/',
@@ -18,6 +18,11 @@ export default new Router({
     // },
     {
       path: '/',
+      name: 'ChatBot',
+      component: ChatBot
+    },
+    {
+      path: '/home',
       name: 'Home',
       component: Home,
     },
@@ -37,13 +42,8 @@ export default new Router({
       component: Attraction
     },
     {
-      path: '/chatbot',
-      name: 'ChatBot',
-      component: ChatBot
-    },
-    {
       path: '*',
-      redirect: '/pages/'
+      redirect: '/'
     }
   ]
 })

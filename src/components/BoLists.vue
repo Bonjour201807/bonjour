@@ -1,6 +1,6 @@
 <template>
   <div class="bo-lists" ref="bo-lists">
-    <div class="list-box" v-for="list in lists" @click="routerToArraction(list.id)">
+    <div class="list-box" v-for="list in lists" @click="routerToArraction(list.sid)">
       <div class="list-pic" :style="{backgroundImage:'url('+list.pic+')'}">
         <div class="list-cover">
           {{list.desc}}
@@ -33,8 +33,8 @@ export default {
     this.onScrollGet();
   },
   methods: {
-    routerToArraction(id) {
-      this.$router.push({ name: "Attraction", params: { id } });
+    routerToArraction(sid) {
+      this.$router.push({ name: "Attraction", params: { sid } });
     },
     onScrollGet() {
       let fetchState = true;

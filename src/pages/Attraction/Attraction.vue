@@ -20,12 +20,12 @@
           </p>
         </div>
         <br />
-        <weather :lng="attractionItem.longitude" :lat="attractionItem.latitude"></weather>
-        <map-gd :lng="attractionItem.longitude" :lat="attractionItem.latitude"></map-gd>
+        <weather :lng="attractionItem.lng" :lat="attractionItem.lat"></weather>
+        <map-gd :lng="attractionItem.lng" :lat="attractionItem.lat"></map-gd>
         <br />
       </div>
     </template>
-    <loading v-show="showLoading"></loading>
+    <!-- <loading v-show="showLoading"></loading> -->
   </div>
 </template>
 
@@ -42,7 +42,7 @@ export default {
   components: { Scroller, Tags, MapGd, Weather, Loading },
   data() {
     return {
-      showLoading: true
+      showLoading: false
     };
   },
   computed: {
@@ -56,15 +56,16 @@ export default {
     // Getting route params
     const sid = this.$route.params.sid;
     // Dispatching getSingleEvent
-    this.$store
-      .dispatch({
-        type: "getSingleEvent",
-        sid: sid
-      })
-      .then(res => {
-        // Success handle
-        this.showLoading = false;
-      });
+    this.$store.dispatch("getSingleEvent", { sid: sid }).then(res => {
+      // Success handle
+      console.log("test");
+      console.log(sid);
+      this.showLoading = false;
+    });
+  },
+  mounted() {
+    console.log("test1");
+    console.log(this.attractionItem);
   }
 };
 </script>

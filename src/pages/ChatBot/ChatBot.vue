@@ -1,10 +1,5 @@
 <template>
     <div>
-      <!-- <div id="header"> -->
-        <!-- <mu-appbar :title="user.name" :zDepth="0"> -->
-            <!-- <el-button icon="el-icon-close" circle type="info" slot="left"/></el-button> -->
-        <!-- </mu-appbar> -->
-      <!-- </div> -->
       <div id="content">
         <div class="patch-1"></div>
         <dialogue :userData="userData" id="dailogue" name="dailogue"></dialogue>
@@ -41,7 +36,8 @@ export default {
     ...mapGetters(["nowMessageList"]),
     ...mapState({
       user: state => state.chatbot.data.user,
-      bot: state => state.chatbot.data.bot
+      bot: state => state.chatbot.data.bot,
+      hotTags: state => state.searchInfo.hotTags
     }),
     userData() {
       return {
@@ -51,7 +47,7 @@ export default {
     }
   },
   watch: {
-    nowMessageList: function() {
+    nowMessageList() {
       this.$nextTick(() => {
         document.body.scrollTop = document.body.scrollHeight;
         // console.log(document.body.scrollTop);
@@ -62,11 +58,11 @@ export default {
     addUserInput() {
       if (this.text.length && this.text != "\n") {
         this.$store.dispatch("sendValue", {
-          uid: this.userData.user.uid,
+          // uid: this.userData.user.uid,
+          uid: 123,
           message: { query: this.text },
           user_flag: 0
         });
-        // console.log(this.text);
       } else {
         console.log("不能为空");
       }
@@ -104,14 +100,6 @@ export default {
   height: 75px;
 }
 
-.input {
-  border-color: #e2e2e2;
-  /* height: 20px; */
-  width: 60%;
-  /* min-width: 200px; */
-  margin: 15px 0;
-  line-height: 30px;
-}
 .elinput {
   padding-top: 15px;
 }
