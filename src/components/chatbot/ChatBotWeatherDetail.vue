@@ -22,37 +22,6 @@
         <div class="swiper-pagination" slot="pagination"></div>
       </swiper>
     </ul>
-      <!-- <el-card v-for="(item,index) in weatherdate">
-        <div v-if="index === 0">
-          <i class="el-icon-location-outline">{{weatherdata.HeWeather6[0].basic.location}}</i>
-        </div>
-        <h4>{{ item.date }}</h4>
-        <div class="icon i-12-m "></div>
-        <p class="temp ">
-          <span class="large-temp">{{ item.tmp_max }}℃</span>
-          <span class="small-temp"> / {{ item.tmp_min }}℃</span>
-        </p >
-        <img :src='"static/weather/"+item.cond_code_d+".png"' alt="" style="height:25px">
-        <span class="cond">日间：{{ item.cond_txt_d }}</span>
-        <span>/</span>
-        <img :src='"static/weather/"+item.cond_code_n+".png"' alt="" style="height:25px">
-        <span class="cond">夜晚：{{ item.cond_txt_n }}</span>
-        <div v-if="index === 0">
-          <p>
-            <el-tag type="info" size="mini">穿衣指数: </el-tag>
-            <span>{{lifedata.HeWeather6[0].lifestyle[1].txt}}</span>
-          </p>
-          <p>
-            <el-tag type="info" size="mini">出行指数: </el-tag>
-            <span>{{lifedata.HeWeather6[0].lifestyle[4].txt}}</span>
-          </p>
-          <p>
-            <el-tag type="info" size="mini">防晒指数: </el-tag>
-            <span>{{lifedata.HeWeather6[0].lifestyle[5].txt}}</span>
-          </p>
-        </div>
-      </el-card> -->
-    <!-- </ul> -->
   </div>
 </template>
 

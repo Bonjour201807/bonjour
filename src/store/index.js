@@ -6,6 +6,7 @@ import attraction from './modules/attraction'
 import weather from './modules/weather'
 import searchInfo from './modules/searchInfo'
 import selectPlace from './modules/selectPlace'
+import selectTags from './modules/selectTags'
 import chatbot from './modules/chatbot'
 
 Vue.use(Vuex)
@@ -17,6 +18,7 @@ export default new Vuex.Store({
         weather,
         searchInfo,
         selectPlace,
+        selectTags,
         chatbot
     }
 })

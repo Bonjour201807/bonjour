@@ -1,48 +1,32 @@
 <template>
-  <div class="list">
-    <template v-if="mold === 'thumbnail'" v-for="item in items">
-      <router-link
-        class="thumbnail"
-        :to="{name: 'Attraction', params: { sid: item.sid }}">
-        <div class="content">
-          <img src='../../static/pic/bon-1.png'>
-          <!-- <img :src="item.image_hlarge" alt="cover"> -->
-          <h3>{{item.name}}</h3>
-          <p><b>看点:&nbsp;&nbsp;</b>
-            <ul>
-              <li v-for="item in item.tags">{{ item }}&nbsp;&nbsp;</li>
-            </ul>
-          </p>
-          <p><b>耍法:&nbsp;&nbsp;</b>
-            <ul>
-              <li v-for="item in item.plays">{{ item }}&nbsp;&nbsp;</li>
-            </ul>
-          </p>
-          <!-- <p>{{item.intro | subStr}}</p> -->
-        </div>
-      </router-link>
-    </template>
-    <!-- <template v-if="mold === 'basic'">
-      <ul class="basic">
-        <li v-for="item in items">
-          <a href="#">
-            <h3>{{item.title}}</h3>
-            <div class="info">{{item.comments}}</div>
-          </a>
-        </li>
-      </ul>
-    </template> -->
+<div>
+  <div class="list" v-for="attraction in items">
+    <router-link
+      class="thumbnail"
+      :to="{name: 'Attraction', params: { sid: attraction.sid }}">
+      <div class="content">
+        <img src='../../static/pic/bon-1.png'>
+        <h3>{{attraction.name}}</h3>
+        <p><b>看点:&nbsp;&nbsp;</b>
+          <ul>
+            <li v-for="item in attraction.tags">{{ item }}&nbsp;&nbsp;</li>
+          </ul>
+        </p>
+        <p><b>耍法:&nbsp;&nbsp;</b>
+          <ul>
+            <li v-for="item in attraction.plays">{{ item }}&nbsp;&nbsp;</li>
+          </ul>
+        </p>
+      </div>
+    </router-link>
   </div>
+</div>
 </template>
 
 <script>
 export default {
   name: "list",
   props: {
-    mold: {
-      type: String,
-      default: "basic"
-    },
     items: {
       type: Array,
       required: true
@@ -50,13 +34,13 @@ export default {
   },
   data() {
     return {};
-  },
-  filters: {
-    subStr: function(value) {
-      let newVal = value.replace(/<.*?>/g, "");
-      return newVal.slice(0, 30);
-    }
   }
+  //   filters: {
+  //     subStr: function(value) {
+  //       let newVal = value.replace(/<.*?>/g, "");
+  //       return newVal.slice(0, 30);
+  //     }
+  //   }
 };
 </script>
 
@@ -67,12 +51,10 @@ export default {
     display: block;
     padding: 2.5rem 1.8rem 2.5rem 0;
     margin-left: 1.8rem;
-
     .content {
       overflow: hidden;
       margin-bottom: 1rem;
     }
-
     h3 {
       margin-top: 0;
       margin-bottom: 0.6rem;
@@ -82,27 +64,23 @@ export default {
       font-weight: 500;
       color: #494949;
     }
-
     p {
       line-height: 1.5;
       text-align: justify;
       color: #aaa;
       font-size: 1.2rem;
       overflow: hidden;
-
       b {
         color: #555;
         float: left;
       }
     }
-
     img {
       float: left;
       width: 25.6%;
       height: 8.678rem;
       margin-right: 2.5rem;
     }
-
     ul {
       display: inline;
 
@@ -111,7 +89,6 @@ export default {
       }
     }
   }
-
   .thumbnail ~ .thumbnail::before {
     position: absolute;
     left: 0;
@@ -120,22 +97,6 @@ export default {
     height: 0.1rem;
     content: "";
     background: #e3e3e3;
-  }
-
-  .basic {
-    h3 {
-      padding: 0;
-      line-height: 1.41;
-      font-size: 1.7rem;
-      font-weight: 500;
-      color: #494949;
-    }
-
-    .info {
-      margin-top: 0.5rem;
-      font-size: 1.4rem;
-      color: #42bd56;
-    }
   }
 }
 </style>

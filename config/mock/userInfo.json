@@ -1,6 +1,6 @@
 {
-  "uid": 1,
-  "avatar": "/static/human.jpg",
+  "uid": "2abc",
+  "avatar": "static/human.jpg",
   "birthday": "11/3/95",
   "name": "Pate Tran",
   "gender": "female",

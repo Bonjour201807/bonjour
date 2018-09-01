@@ -10,14 +10,36 @@
     <link rel="icon" type="image/x-icon" href="./static/logo.png">
     <!-- 搜狐获取用户IP与地区接口 -->
     <script src="http://pv.sohu.com/cityjson?ie=utf-8"></script>
-    <script type="text/javascript">
-        console.log(returnCitySN["cip"] + ',' + returnCitySN["cname"])
-    </script>
+    <!-- <script type="text/javascript">console.log(returnCitySN)</script> -->
+    <script type="text/javascript" src="https://webapi.amap.com/maps?v=1.4.8&key=a72252c4069ca54c27ebe4aec1bd1075"></script>
+    <script src="//webapi.amap.com/ui/1.0/main.js"></script>
 </head>
 
 <body>
     <div id="app"></div>
     <!-- built files will be auto injected -->
 </body>
+<script>
+    // AMap.plugin("AMap.Geolocation", function () {
+    //     geolocation = new AMap.Geolocation({
+    //         enableHighAccuracy: true, //是否使用高精度定位，默认:true
+    //         timeout: 10000, //超过10秒后停止定位，默认：无穷大
+    //         maximumAge: 0, //定位结果缓存0毫秒，默认：0
+    //         convert: true, //自动偏移坐标，偏移后的坐标为高德坐标，默认：true
+    //         showButton: false, //显示定位按钮，默认：true
+    //         buttonPosition: "LB", //定位按钮停靠位置，默认：'LB'，左下角
+    //         buttonOffset: new AMap.Pixel(10, 20), //定位按钮与设置的停靠位置的偏移量，默认：Pixel(10, 20)
+    //         showMarker: false, //定位成功后在定位到的位置显示点标记，默认：true
+    //         showCircle: false, //定位成功后用圆圈表示定位精度范围，默认：true
+    //         panToLocation: false, //定位成功后将定位到的位置作为地图中心点，默认：true
+    //         zoomToAccuracy: false //定位成功后调整地图视野范围使定位位置及精度范围视野内可见，默认：false
+    //     });
+    //     geolocation.getCurrentPosition();
+    //     AMap.event.addListener(geolocation, "complete", onComplete); //返回定位信息
+    // });
+    // function onComplete(data) {
+    //     console.log(data.position)
+    // }
+</script>
 
 </html>

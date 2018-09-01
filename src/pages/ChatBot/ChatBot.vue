@@ -2,7 +2,7 @@
     <div>
       <div id="content">
         <div class="patch-1"></div>
-        <dialogue :userData="userData" id="dailogue" name="dailogue"></dialogue>
+        <dialogue :uid="uid" id="dailogue" name="dailogue"></dialogue>
         <div class="patch-2"></div>
       </div>
       <div id="footer">
@@ -35,8 +35,7 @@ export default {
   computed: {
     ...mapGetters(["nowMessageList"]),
     ...mapState({
-      user: state => state.chatbot.data.user,
-      bot: state => state.chatbot.data.bot,
+      uid: state => state.chatbot.data.uid,
       hotTags: state => state.searchInfo.hotTags
     }),
     userData() {
@@ -50,7 +49,6 @@ export default {
     nowMessageList() {
       this.$nextTick(() => {
         document.body.scrollTop = document.body.scrollHeight;
-        // console.log(document.body.scrollTop);
       });
     }
   },
@@ -58,11 +56,12 @@ export default {
     addUserInput() {
       if (this.text.length && this.text != "\n") {
         this.$store.dispatch("sendValue", {
-          // uid: this.userData.user.uid,
-          uid: 123,
+          uid: this.uid,
           message: { query: this.text },
           user_flag: 0
         });
+        console.log("底部输入框, uid:");
+        console.log(this.uid);
       } else {
         console.log("不能为空");
       }

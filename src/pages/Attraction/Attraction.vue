@@ -1,31 +1,49 @@
 <template>
   <div class="detail-view">
-    <template v-if="!showLoading">
-      <div class="info">
-        <h2>{{attractionItem.name}}</h2>
-        <scroller :slides="slides"></scroller>
-        <tags v-if="attractionItem.tags" :items="attractionItem.tags"></tags>
-        <div class="detail">
-          <p><b>耍法:&nbsp;&nbsp;</b>
-            <ul>
-              <li v-for="item in attractionItem.plays">{{ item }}&nbsp;&nbsp;</li>
-            </ul>
-          </p>
-        </div>
-        <div class="detail">
-          <p><b>Tips:&nbsp;&nbsp;</b>
-            <ul>
-              <li v-for="item in attractionItem.plays">{{ item }}&nbsp;&nbsp;</li>
-            </ul>
-          </p>
-        </div>
-        <br />
-        <weather :lng="attractionItem.lng" :lat="attractionItem.lat"></weather>
-        <map-gd :lng="attractionItem.lng" :lat="attractionItem.lat"></map-gd>
-        <br />
+    <div class="info">
+      <h2>{{attractionItem.name}}</h2>
+      <scroller :slides="slides"></scroller>
+      <p>
+        <span v-for="(tag,index) in attractionItem.tags" :key="index">
+          <el-button size="mini" round class='tag'>{{ tag }}</el-button>
+        &nbsp;
+        </span>
+      </p>
+      <!-- <tags v-if="attractionItem.tags" :items="attractionItem.tags"></tags> -->
+      <div class="detail">
+        <p><b>耍法:&nbsp;&nbsp;</b>
+          <ul>
+            <li v-for="item in attractionItem.plays">{{ item }}&nbsp;&nbsp;</li>
+          </ul>
+        </p>
       </div>
-    </template>
-    <!-- <loading v-show="showLoading"></loading> -->
+      <div class="detail">
+        <p><b>用时参考:&nbsp;&nbsp;</b>{{ attractionItem.duration }}</p>
+      </div>
+      <div class="detail">
+        <p><b>交通:&nbsp;&nbsp;</b>{{ attractionItem.traffic }}</p>
+      </div>
+      <div class="detail">
+        <p><b>门票:&nbsp;&nbsp;</b>{{ attractionItem.ticket }}</p>
+      </div>
+      <div class="detail">
+        <p><b>开放时间:&nbsp;&nbsp;</b>{{ attractionItem.open }}</p>
+      </div>
+      <div class="detail">
+        <p><b>景点介绍:&nbsp;&nbsp;</b>{{ attractionItem.summary }}</p>
+      </div>
+      <div class="detail">
+        <p><b>看点/耍法:&nbsp;&nbsp;</b>
+          <ul>
+            <li v-for="item in attractionItem.comments">{{ item }}&nbsp;&nbsp;</li>
+          </ul>
+        </p>
+      </div>
+      <br />
+      <weather :lng="attractionItem.lng" :lat="attractionItem.lat"></weather>
+      <map-gd :lng="attractionItem.lng" :lat="attractionItem.lat"></map-gd>
+      <br />
+    </div>
   </div>
 </template>
 
@@ -35,15 +53,12 @@ import Scroller from "@/components/Scroller";
 import Tags from "@/components/Tags";
 import MapGd from "@/components/MapGd";
 import Weather from "@/components/Weather";
-import Loading from "@/components/Loading";
 
 export default {
   name: "attraction",
-  components: { Scroller, Tags, MapGd, Weather, Loading },
+  components: { Scroller, Tags, MapGd, Weather },
   data() {
-    return {
-      showLoading: false
-    };
+    return {};
   },
   computed: {
     // Getting Vuex State from store/modules/attraction
@@ -56,16 +71,7 @@ export default {
     // Getting route params
     const sid = this.$route.params.sid;
     // Dispatching getSingleEvent
-    this.$store.dispatch("getSingleEvent", { sid: sid }).then(res => {
-      // Success handle
-      console.log("test");
-      console.log(sid);
-      this.showLoading = false;
-    });
-  },
-  mounted() {
-    console.log("test1");
-    console.log(this.attractionItem);
+    this.$store.dispatch("getSingleEvent", { sid: sid });
   }
 };
 </script>

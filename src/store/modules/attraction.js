@@ -15,7 +15,6 @@ const getters = {
         filepaths.map(data =>
             slides.push(
                 data.filepath
-                // axios.defaults.baseURL.concat(data.filepath)
             ),
         );
         return slides;
@@ -56,9 +55,9 @@ const actions = {
      */
     getSingleEvent({ commit, state }, { sid }) {
         return new Promise((resolve, reject) => {
-            axios.get('http://182.254.227.188:45678/v1/api/attractions', {
+            axios.get('http://182.254.227.188:45678/v1/api/spot', {
                 params: {
-                    id: sid
+                    sid: sid
                 }
             })
                 .then((res) => {

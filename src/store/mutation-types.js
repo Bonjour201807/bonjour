@@ -17,8 +17,14 @@ module.exports = {
   SAVE_SEARCH_DAY: 'SAVE_SEARCH_DAY',
 
   //selectPlace
-  // 保存省市区列表信息，用户当前定位信息及选择的出发地信息
+  // 保存用户当前定位信息
   SAVE_LOCATION: 'SAVE_LOCATION',
+  // 保存用户选择的出发地信息
+  SAVE_POSITION: 'SAVE_POSITION',
+  // 保存省市区列表信息
   SAVE_AREA_LIST: 'SAVE_AREA_LIST',
 
+  //selectTags
+  // 保存用户选择和输入的标签信息
+  SAVE_SELECTED_TAGS: 'SAVE_SELECTED_TAGS'
 }

@@ -1,176 +1,162 @@
 <template>
-  <div class="scroller">
-    <div class="content" style="width: 100%; max-width: 350px;">
-      <!-- <slot name="promItem"></slot> -->
-      <ul class="hasCover">
-        <swiper :options="swiperOption" ref="mySwiper" class="swiper">
-          <swiper-slide v-for="(item, index) in detail" :key="index" class="swiper-slide">
-            <router-link :to="{name: 'Attraction', params: { sid: item.sid }}" append>
-              <single-attraction :message="item" mode="list"></single-attraction>
-              <!-- <img v-if="item.images" :src="item.images.large" alt="">
-              <span class="title">{{item.title}}</span> -->
-              <!-- <rating v-if="item.rating" :rating="item.rating"></rating> -->
-            </router-link>
-          </swiper-slide>
-          <div class="swiper-pagination" slot="pagination"></div>
-        </swiper>
-      </ul>
-    </div>
+<div>
+  <div class="list" v-for="attraction in detail">
+    <router-link
+      :to="{name: 'Attraction', params: { sid: attraction.sid }}">
+      <el-container>
+        <el-aside width="30%">
+          <img :src="attraction.images[0]" :alt="attraction.name">
+        </el-aside>
+        <el-container>
+          <el-header><span>{{attraction.name}}</span></el-header>
+          <el-main>
+            <p><b>看点:&nbsp;&nbsp;</b>
+              <ul>
+                <li v-for="item in attraction.tags">{{ item }}&nbsp;&nbsp;</li>
+              </ul>
+            </p>
+            <p><b>耍法:&nbsp;&nbsp;</b>
+              <ul>
+                <li v-for="item in attraction.comments">{{ item }}&nbsp;&nbsp;</li>
+              </ul>
+            </p>
+          </el-main>
+        </el-container>
+      </el-container>
+    </router-link>
   </div>
+  <p></p>
+  <el-button :class="next_page" style="float: right" 
+  size="mini" type='primary' @click="nextPage(msgIndex)" round >下一页</el-button>
+  <el-button :id="previous_page" style="display: none" 
+  size="mini" type='primary' @click="previousPage(msgIndex)" round >上一页</el-button>
+</div>
 </template>
 
 <script>
-import SingleAttraction from "@/components/chatbot/SingleAttraction";
-import { swiper, swiperSlide } from "vue-awesome-swiper";
-require("swiper/dist/css/swiper.css");
+import axios from "axios";
+import { mapGetters, mapState } from "vuex";
 
 export default {
   name: "RecList",
-  components: { SingleAttraction, swiper, swiperSlide },
-  props: ["detail"],
+  components: {},
+  props: ["uid", "detail", "msgIndex"],
   data() {
     return {
-      // slides: [
-      //   "../static/pic/bon-1.png",
-      //   "../static/pic/bon-2.png",
-      //   "../static/pic/bon-3.png",
-      //   "../static/pic/bon-4.png",
-      //   "../static/pic/bon-5.png"
-      // ],
-      swiperOption: {
-        debugger: true,
-        centeredSlides: true,
-        pagination: ".swiper-pagination",
-        slidesPerView: "auto",
-        loop: true,
-        spaceBetween: 13,
-        pagination: {
-          el: ".swiper-pagination",
-          clickable: true //此参数设置为true时，点击分页器的指示点分页器会控制Swiper切换。
-        }
-      }
+      next_page: "".concat("next_page_", this.msgIndex),
+      previous_page: "".concat("previous_page_", this.msgIndex)
     };
+  },
+  computed: {
+    ...mapState({
+      selectedPlace: state => state.selectPlace.selectedPlace,
+      select_tags: state => state.selectTags.select_tags,
+      input_tag: state => state.selectTags.input_tag
+    }),
+    ...mapGetters(["nowMessageList"])
+  },
+  methods: {
+    getSpots(page_id_index, index) {
+      var data = {};
+      data["select_tags"] = this.select_tags;
+      data["input_tag"] = this.input_tag;
+      data["departure"] = this.selectedPlace.departure;
+      data["adcode"] = this.selectedPlace.adcode;
+      data["days"] = this.selectedPlace.days;
+      axios
+        .get("/spots", {
+          params: {
+            uid: this.uid,
+            size: 3,
+            from_page: page_id_index,
+            data: data
+          }
+        })
+        .then(res => {
+          // 使用tags接口中的数据替换messagelist中的标签
+          this.$set(
+            this.nowMessageList[index].message,
+            "page_id_index",
+            page_id_index
+          );
+          this.$set(
+            this.nowMessageList[index].message,
+            "data",
+            res.data.message.data
+          );
+        });
+    },
+    nextPage(index) {
+      var obj = document.getElementById(this.previous_page);
+      obj.setAttribute("style", "display: inline !important; float: right");
+      var page_id_index = this.nowMessageList[index].message.page_id_index;
+      if (page_id_index === undefined) {
+        page_id_index = 1;
+      } else {
+        page_id_index = page_id_index + 1;
+      }
+      this.getSpots(page_id_index, index);
+    },
+    previousPage(index) {
+      var page_id_index = this.nowMessageList[index].message.page_id_index;
+      if (page_id_index <= 0) {
+        page_id_index = 0;
+      } else {
+        page_id_index = page_id_index - 1;
+      }
+      this.getSpots(page_id_index, index);
+    }
   }
 };
 </script>
 
 <style lang="scss" scoped>
-.swiper {
-  width: 250px;
-}
-
-.swiper-slide {
-  width: 80%;
-  height: 300px;
-  // display: -webkit-box;
-  // display: -ms-flexbox;
-  // display: -webkit-flex;
-  // display: flex;
-  // -webkit-box-pack: center;
-  // -ms-flex-pack: center;
-  // -webkit-justify-content: center;
-  // justify-content: center;
-  // -webkit-box-align: center;
-  // -ms-flex-align: center;
-  // -webkit-align-items: center;
-  // align-items: center;
-
-  &.swiper-slide-active {
-    img {
-      margin-top: 0;
-      width: 100%;
-      height: 100%;
+.list {
+  p {
+    line-height: 1.5;
+    text-align: justify;
+    color: #aaa;
+    font-size: 1.2rem;
+    overflow: hidden;
+    margin: 5px 0 0 10px;
+    b {
+      color: #555;
+      float: left;
     }
   }
   img {
-    display: block;
-    margin: 0 auto;
-    margin-top: 3.5%;
-    width: 95.625%;
-    height: 90.625%;
-    -webkit-transition: all 1s ease 0s;
-    -moz-transition: all 1s ease 0s;
-    -ms-transition: all 1s ease 0s;
-    -o-transition: all 1s ease 0s;
-    transition: all 1s ease 0s;
+    width: 75px;
+    height: 80px;
   }
-}
+  ul {
+    display: inline;
 
-.scroller {
-  padding-top: 1rem;
-}
-
-.header {
-  height: 2.6rem;
-  line-height: 2.6rem;
-  padding: 0 1.6rem;
-
-  a {
-    float: right;
-    font-size: 1.44rem;
-    &:last-child {
-      color: #42bd56;
+    li {
+      float: left;
     }
   }
-
-  h2 {
-    display: inline-block;
-  }
 }
-
-.content {
-  box-sizing: content-box;
-}
-
-.hasCover {
-  overflow-x: auto;
-  white-space: nowrap;
+.el-aside {
+  color: #333;
   text-align: center;
-
-  li {
-    display: inline-block;
-    width: 10rem;
-    margin-left: 1rem;
-  }
-
-  // li:first-child {
-  // padding-left: 0.8rem;
-  // }
-
-  // img {
-  //   height: 15rem;
-  // }
+  width: 75px !important;
+  overflow: visible;
 }
-
-.onlyString {
-  overflow-x: auto;
-  white-space: nowrap;
-
-  li {
-    display: inline-block;
-    margin: 0 0 0.8rem 1.6rem;
-    font-size: 1.6rem;
-    border: solid 0.1rem;
-    border-radius: 0.4rem;
-    vertical-align: middle;
-  }
-
-  a {
-    height: 5rem;
-    line-height: 5rem;
-    padding: 0 2.4rem;
-    letter-spacing: 0.16rem;
-    overflow: auto;
-    display: block;
-    text-align: center;
-  }
-
-  li:empty {
-    width: 100%;
-    display: block;
-    height: 0.1rem;
-    border: 0;
-    margin: 0;
-  }
+.el-header {
+  color: #333;
+  text-align: center;
+  padding: 0 15px;
+  height: auto !important;
+  line-height: 18px;
+  font-size: 15px;
+}
+.el-main {
+  color: #333;
+  text-align: center;
+  padding: 0;
+}
+.el-button {
+  padding: 7px 10px !important;
+  margin-left: 10px;
 }
 </style>

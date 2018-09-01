@@ -1,24 +1,57 @@
 <template>
-   <div class="weather-container">
-        <weather-detail :weatherdata="weatherdata" :weatherdate="weatherdate" :lifedata="lifedata" v-if="flag"></weather-detail>
+  <div class="weather-container">
+    <div class="weather-detail">
+    <!-- <el-tag size="medium">{{weatherdata.HeWeather6[0].basic.location}}天气</el-tag> -->
+      <ul>
+        <swiper :options="swiperOption" ref="mySwiper" class="swiper">
+          <swiper-slide v-for="(item, index) in weatherdate" :key="index" class="swiper-slide">
+              <div>
+                <i class="el-icon-location-outline">{{weatherdata.HeWeather6[0].basic.location}}</i>
+              </div>
+              <h4>{{ item.date }}</h4>
+              <div class="icon i-12-m "></div>
+              <p class="temp ">
+                <span class="large-temp">{{ item.tmp_max }}℃</span>
+                <span class="small-temp"> / {{ item.tmp_min }}℃</span>
+              </p >
+              <img :src='"static/weather/"+item.cond_code_d+".png"' alt="" style="height:25px">
+              <span class="cond">日间：{{ item.cond_txt_d }}</span>
+              <span>/</span>
+              <img :src='"static/weather/"+item.cond_code_n+".png"' alt="" style="height:25px">
+              <span class="cond">夜晚：{{ item.cond_txt_n }}</span>
+          </swiper-slide>
+          <div class="swiper-pagination" slot="pagination"></div>
+        </swiper>
+      </ul>
     </div>
+        <!-- <weather-detail :weatherdata="weatherdata" :weatherdate="weatherdate" :lifedata="lifedata" v-if="flag"></weather-detail> -->
+  </div>
 </template>
 
 <script>
 import { mapState } from "vuex";
 import axios from "axios";
-import WeatherDetail from "./ChatBotWeatherDetail";
+import { swiper, swiperSlide } from "vue-awesome-swiper";
+require("swiper/dist/css/swiper.css");
+// import WeatherDetail from "./ChatBotWeatherDetail";
 
 export default {
   name: "weather",
   props: ["message"],
-  components: { WeatherDetail },
+  components: { swiper, swiperSlide },
+  // components: { WeatherDetail },
   data() {
     return {
       weatherdata: {},
       lifedata: {},
       weatherdate: {},
-      flag: false
+      flag: false,
+      swiperOption: {
+        pagination: {
+          el: ".swiper-pagination",
+          clickable: true //此参数设置为true时，点击分页器的指示点分页器会控制Swiper切换。
+        }
+      }
     };
   },
   mounted() {
@@ -36,25 +69,17 @@ export default {
         )
         .then(res => {
           var res = res.data;
-          // this.$store.state.weatherdata = res;
           this.weatherdata = res;
-          // console.log(this.weatherdata);
           this.flag = true;
           var weatherdate_lst = this.message.start_time.split(" ");
           var weatherindex_lst = this.message.delta_time.split(" ");
           var weatherdate = weatherdate_lst[0];
-          // console.log(weatherdate);
           var weatherindex = parseInt(weatherindex_lst[0]);
           var arr = this.weatherdata.HeWeather6[0].daily_forecast;
-          // console.log(arr);
           for (var j = 0; j < arr.length; j++) {
-            // console.log(arr[j].date);
             if (arr[j].date === weatherdate) {
-              // console.log(arr[j].date);
               var new_arr = arr.slice(j, j + weatherindex);
-              // console.log(cnew_arr);
               this.weatherdate = new_arr;
-              // console.log(this.weatherdate);
             }
           }
         });
@@ -69,34 +94,9 @@ export default {
         .then(res => {
           var res = res.data;
           this.lifedata = res;
-          // console.log(this.lifedata);
         });
     }
   }
-  //   computed: {
-  //       // Getting Vuex State from store/modules/weather
-  //     ...mapState({
-  //         citycode: state => state.weather.citycode,
-  //     }),
-  //   },
-  //   created () {
-  //       console.log('longtitude!!!!!!!!!!')
-  //       console.log(this.lng)
-  //       console.log('latitude!!!!!!!!!!')
-  //       console.log(this.lat)
-  //     // Getting longitude and latitude
-  //     // const lng = this.lng
-  //     // const lat = this.lat
-
-  //     this.$store.dispatch({
-  //         type: 'getCityCode',
-  //         lng: this.lng,
-  //         lat: this.lat
-  //     }).then(res => {
-  //         console.log('0')
-  //         console.log(res)
-  //     });
-  //   }
 };
 </script>
 
@@ -104,5 +104,20 @@ export default {
 .weather-container {
   height: 200px;
   display: inline-block;
+  .weather-detail {
+    width: 250px;
+    line-height: 20px;
+    font-size: 13px;
+    .temp {
+      font-size: 20px;
+    }
+  }
+  .swiper-slide {
+    margin-bottom: 60px;
+    width: 250px;
+  }
+  .swiper-pagination {
+    display: inline-block;
+  }
 }
 </style>
